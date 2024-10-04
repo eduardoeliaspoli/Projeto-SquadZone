@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Criar Usuário</title>
+</head>
+<style>
+        body {
+            background-color: #212121;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh; 
+            margin: 0; 
+        }
+        #dados { 
+            height: auto; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px; 
+        }
+        form {
+            display: flex;
+            flex-direction: column; 
+            gap: 15px;
+        }
+</style>
+
+<body>
+    <div id="dados">
+        <h1> - Criar Usuário - </h1>
+        <div>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.nome.label }} {{ form.nome }}
+                {{ form.localizacao.label }} {{ form.localizacao }}
+                {{ form.data_nascimento.label }} {{ form.data_nascimento }}
+                {{ form.email.label }} {{ form.email }}
+                {{ form.verEmail.label }} {{ form.verEmail }}
+                {{ form.senha.label }} {{ form.senha }}
+                {{ form.verSenha.label }} {{ form.verSenha }}
+
+                <button type="submit">Criar</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
