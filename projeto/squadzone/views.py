@@ -40,6 +40,11 @@ def criarUsuario(request):
         
     return render(request, 'CriarUsuario.html', {'form': form})
 
+
+def agenda(request):
+    return render(request, 'agenda.html')
+
+
 def sucesso(request):
     return HttpResponse('Cadastrado com sucesso')
 
