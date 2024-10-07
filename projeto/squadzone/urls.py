@@ -12,5 +12,6 @@ urlpatterns =  [
     path('cadastrar/usuario', views.criarUsuario, name='CriarUsuario'),
     path('cadastrar/time', views.criarTime, name='criarTime'),
     path('sucesso/', views.sucesso, name='sucesso'),
-    path('agenda/', include('agenda.urls'))
+    path('agenda/', include('agenda.urls')),
+
 ]
