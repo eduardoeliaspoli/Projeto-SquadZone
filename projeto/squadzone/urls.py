@@ -12,5 +12,11 @@ urlpatterns =  [
     path('cadastrar/usuario', views.criarUsuario, name='CriarUsuario'),
     path('cadastrar/time', views.criarTime, name='criarTime'),
     path('sucesso/', views.sucesso, name='sucesso'),
-    path('agenda/', include('agenda.urls'))
+    path('treinos/', views.treinos, name = 'criarTreino')
 ]
+
+
+#class TreinoForms(forms.ModelForm):
+    #class Meta:
+     #   model = Treino
+      #  fields = ['time_1','time_2', 'data_treino','hora','agenda']
