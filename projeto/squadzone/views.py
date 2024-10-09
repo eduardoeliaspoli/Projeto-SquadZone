@@ -48,3 +48,5 @@ def agenda(request):
 def sucesso(request):
     return HttpResponse('Cadastrado com sucesso')
 
+def home(request):
+    return render(request,'ambiente/index.html')
