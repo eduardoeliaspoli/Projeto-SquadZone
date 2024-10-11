@@ -21,5 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('agenda/', include('agenda.urls')),
     path('chat/', include('chat.urls')),
+    # path('send-message/', send_message, name='send_message'),
     path('', include('squadzone.urls')),
 ]
