@@ -23,13 +23,6 @@
         });
 
         const channel = pusher.subscribe('chat');
-<<<<<<< Updated upstream
-=======
-        channel.bind('message', function (data) {
-            const chat = document.getElementById('chat');
-            chat.innerHTML += `<div>${data.message}</div>`;
-        });
->>>>>>> Stashed changes
 
         function sendMessage() {
             const messageInput = document.getElementById('message');

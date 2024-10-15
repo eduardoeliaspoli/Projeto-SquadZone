@@ -18,5 +18,4 @@ urlpatterns =  [
     path('login/', auth_views.LoginView.as_view(), name='login'),
     
     path('treinos/', views.treinos, name = 'criarTreino')
-
 ]

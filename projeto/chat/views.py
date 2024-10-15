@@ -1,17 +1,10 @@
 from django.shortcuts import render
 from django.http import JsonResponse
-<<<<<<< Updated upstream
 from .models import Message
 import pusher
 from django.conf import settings
 
 
-=======
-# from .models import Message
-import pusher
-from django.conf import settings
-
->>>>>>> Stashed changes
 pusher_client = pusher.Pusher(
     app_id=settings.PUSHER_APP_ID,
     key=settings.PUSHER_KEY,
@@ -24,10 +17,7 @@ def index(request):
     messages = Message.objects.all().order_by('-created_at')
     return render(request, 'chat/index.html', {'messages': messages})
 
-<<<<<<< Updated upstream
 
-=======
->>>>>>> Stashed changes
 # def send_message(request):
 #     if request.method == 'POST':
 #         message_content = request.POST.get('message')
