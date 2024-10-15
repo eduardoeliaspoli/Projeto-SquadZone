@@ -12,5 +12,10 @@ urlpatterns =  [
     path('cadastrar/usuario', views.criarUsuario, name='CriarUsuario'),
     path('cadastrar/time', views.criarTime, name='criarTime'),
     path('sucesso/', views.sucesso, name='sucesso'),
+<<<<<<< Updated upstream
     path('agenda/', include('agenda.urls')),
 ]
+=======
+    path('treinos/', views.treinos, name = 'criarTreino')
+]
+>>>>>>> Stashed changes
