@@ -44,6 +44,7 @@ def agenda(request):
 
 
 def sucesso(request):
+
     return HttpResponse('Cadastrado com sucesso')
 
 def treinos(request):
@@ -63,3 +64,4 @@ def treinos(request):
     #class Meta:
      #   model = Treino
       #  fields = ['time_1','time_2', 'data_treino','hora','agenda']
+

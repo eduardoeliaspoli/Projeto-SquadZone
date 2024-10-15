@@ -7,9 +7,7 @@ class Usuario(models.Model):
     localizacao = models.CharField(max_length=255)
     data_nascimento = models.DateField()
     email = models.EmailField(unique=True)
-    verEmail = models.EmailField(unique=True, default='')
     senha = models.CharField(max_length=255)  # Considere usar `make_password` para senhas
-    verSenha = models.CharField(max_length=255, default='')
     nivel_reputacao = models.IntegerField(default=3)  # Padrão para 3
     data_criacao = models.DateTimeField(auto_now_add=True)
 
@@ -119,3 +117,5 @@ class Agenda(models.Model):
 
     def __str__(self):
         return f'Agenda para {self.data_atual} às {self.hora}'
+
+
