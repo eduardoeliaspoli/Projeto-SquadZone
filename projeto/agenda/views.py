@@ -19,6 +19,14 @@ def adicionar_evento(request):
 
 def eventos_json(request):
     eventos = Evento.objects.all().values('id', 'titulo', 'inicio', 'fim')
-    return JsonResponse(list(eventos), safe=False)
+    eventos_json = [
+        {
+            'title': evento['titulo'],
+            'start': evento['inicio'].isoformat(),
+            'end': evento['fim'].isoformat(),
+        }
+        for evento in eventos
+    ]
+    return JsonResponse(eventos_json, safe=False)
 
 
