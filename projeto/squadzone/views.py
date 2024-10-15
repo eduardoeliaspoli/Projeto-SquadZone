@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect, HttpResponse
 from .forms import UsuarioForm, TimeForms
+from django.contrib.auth.views import LoginView
+from django.urls import reverse_lazy
 
 
 def index(request):
@@ -50,3 +52,11 @@ def sucesso(request):
 
 def home(request):
     return render(request,'ambiente/index.html')
+
+class CustomLoginView(LoginView):
+    template_name = 'login.html'  # Nome do seu template
+    success_url = reverse_lazy('home')  # URL para redirecionar após o login bem-sucedido
+
+# Se você não quiser usar uma view baseada em classe, pode fazer assim:
+def login_view(request):
+    return LoginView.as_view(template_name='login.html')(request)
