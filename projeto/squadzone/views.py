@@ -47,4 +47,3 @@ def agenda(request):
 
 def sucesso(request):
     return HttpResponse('Cadastrado com sucesso')
-

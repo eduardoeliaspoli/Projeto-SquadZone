@@ -4,7 +4,7 @@ from django import forms
 class UsuarioForm(forms.ModelForm):
     class Meta:
         model = Usuario
-        fields = ['nome', 'localizacao', 'data_nascimento', 'email', 'verEmail',  'verSenha', 'senha', 'verSenha']
+        fields = ['nome', 'localizacao', 'data_nascimento', 'email', 'senha']
         widgets = {
             'senha': forms.PasswordInput(),
         }
