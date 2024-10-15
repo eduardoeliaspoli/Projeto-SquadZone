@@ -16,7 +16,8 @@ urlpatterns =  [
 ]
 
 
-#class TreinoForms(forms.ModelForm):
-    #class Meta:
-     #   model = Treino
-      #  fields = ['time_1','time_2', 'data_treino','hora','agenda']
+class TreinoForms(forms.ModelForm):
+    class Meta:
+        model = Treino
+        fields = ['time_1','time_2', 'data_treino','hora','agenda']
+    path('agenda/', include('agenda.urls')),
