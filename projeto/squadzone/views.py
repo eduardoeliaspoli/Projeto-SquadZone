@@ -5,11 +5,6 @@ from .forms import UsuarioForm, TimeForms
 def index(request):
     return render(request, 'index.html')
 
-#def index(request):
-#    postagens = Postagem.objects.all()3
-#     return render(request, 'index.html', {'postagens': postagens})
-
-#
 def criarTime(request):
     if request.method == 'POST':
         form = TimeForms(request.POST,request.FILES)
