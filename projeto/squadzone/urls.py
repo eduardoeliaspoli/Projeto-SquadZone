@@ -4,6 +4,7 @@ from agenda import views as agenda_views
 from django.conf.urls.static import static
 from django.conf import settings
 from django.contrib.auth import views as auth_views
+from .views import login_view
 
 
 
@@ -14,6 +15,6 @@ urlpatterns =  [
     path('cadastrar/time', views.criarTime, name='criarTime'),
     path('sucesso/', views.sucesso, name='sucesso'),
     path('agenda/', include('agenda.urls')),
-    path('login/', views.login_view, name='login'),
+    path('login/', login_view, name='login'),
 ]
 
