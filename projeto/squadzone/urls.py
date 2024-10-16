@@ -13,9 +13,7 @@ urlpatterns =  [
     path('cadastrar/usuario', views.criarUsuario, name='CriarUsuario'),
     path('cadastrar/time', views.criarTime, name='criarTime'),
     path('sucesso/', views.sucesso, name='sucesso'),
-    
     path('agenda/', include('agenda.urls')),
-    path('login/', auth_views.LoginView.as_view(), name='login'),
-    
-    path('treinos/', views.treinos, name = 'criarTreino')
+    path('login/', views.login_view, name='login'),
 ]
+

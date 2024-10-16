@@ -1,12 +1,336 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <!-- Meta tags Obrigatórias -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+        <title>SQUADZONE</title>
+
+    <style>
+        body {
+            font-family: "Silkscreen", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+        .circle {
+            width: 200%;
+            /* Tamanho do círculo */
+            height: 200%;
+            /* Tamanho do círculo */
+            border-radius: 50%;
+            /* Para deixar redondo */
+            overflow: hidden;
+            /* Para ocultar parte da imagem que sair do círculo */
+            display: flex;
+            /* Para centralizar a imagem */
+            align-items: center;
+            /* Centraliza verticalmente */
+            justify-content: center;
+            /* Centraliza horizontalmente */
+            margin: 0 auto;
+            /* Para centralizar o círculo na tela */
+            border: 5px solid #000000;
+            /* Borda do círculo */
+            box-shadow: 0 10px 200px #f5f7fa;
+        }
+
+        .circle img {
+            width: 100%; /* A imagem ocupará toda a largura do círculo */
+            height: 100%; /* A imagem ocupará toda a altura do círculo */
+            object-fit: cover; /* A imagem irá cobrir todo o círculo */
+            
+        }
+
+        .btn-round {
+            width: 60px;
+            /* Ajuste para o tamanho desejado */
+            height: 60px;
+            /* Deve ser igual à largura para manter a forma redonda */
+            font-size: 24px;
+            /* Tamanho da fonte do ícone ou texto */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .custom-btn {
+            width: 100px;
+            /* Largura do botão */
+            height: 100px;
+            /* Altura do botão deve ser igual à largura para ser redondo */
+            display: flex;
+            /* Para centralizar o conteúdo */
+            align-items: center;
+            /* Centraliza verticalmente */
+            justify-content: center;
+            /* Centraliza horizontalmente */
+            padding: 0;
+            /* Remove o padding padrão */
+        }
+
+        .icon {
+            width: 80px;
+            /* Ajuste o tamanho do ícone */
+            height: 80px;
+            /* Ajuste o tamanho do ícone */
+        }
+        .custom-btn-fort {
+            background-color: #1a90d8; /* Cor personalizada */
+            border-color: #1a90d8; /* Cor da borda, se houver */
+        }
+        .custom-btn-cs {
+            background-color: #FF5733; /* Cor personalizada */
+            border-color: #ff4953; /* Cor da borda, se houver */
+        }
+        .custom-btn-lol {
+            background-color: #c79b3b; /* Cor personalizada */
+            border-color: #c79b3b; /* Cor da borda, se houver */
+        }
+        .custom-btn-vava {
+            background-color: #ff4953; /* Cor personalizada */
+            border-color: #ff4953; /* Cor da borda, se houver */
+        }
+    </style>
 </head>
-<script src="https://js.pusher.com/beams/1.0/push-notifications-cdn.js"></script>
-<body>
-    PAGINA INICIAL
+<header>
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <!-- Item na extrema esquerda -->
+            <a class="navbar-brand" href="#">
+                <img src="{% static 'img/logo.png' %}" alt="Logo" width="40" height="40" class="d-inline-block align-text-center">
+                SQUADZONE
+            </a>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">JOGOS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">CAMPEONATOS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">CURSOS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">NOVIDADES</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="./login.html">SKINS</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <!-- Item na extrema direita -->
+            <a class="btn btn-outline-success" href="#">Login</a>
+        </div>
+    </nav>
+</header>
+
+<body style="background-color: #505656">
+    </br>
+    </br>
+    </br>
+    </br>
+    </br>
+    </br>
+    <div class="container">
+        <div class="row">
+            <div class="col-4">
+                </br>
+                </br>
+                </br>
+                <div class="col d-flex justify-content-around">
+                    <!-- <p>
+                        <button onclick="trocarImagem('{% static 'img/circulo/vava2.jpg' %}')" class="btn btn-light rounded-circle custom-btn custom-btn-vava" data-toggle="collapse"
+                            data-target="#collapseVava" aria-expanded="false" aria-controls="collapseVava">
+                            <img src="https://img.icons8.com/?size=100&id=GSHWFnD9x56D&format=png&color=000000" alt="Valorant" class="icon">
+                        </button>
+                    </p>
+                    <p>
+                        <button onclick="trocarImagem('{% static 'img/circulo/lol.jpg' %}')" class="btn btn-light rounded-circle custom-btn custom-btn-lol" data-toggle="collapse"
+                            data-target="#collapseLol" aria-expanded="false" aria-controls="collapseLol">
+                            <img src="https://img.icons8.com/?size=100&id=101282&format=png&color=000000" alt="League of Legends" class="icon">
+                        </button>
+                    </p> -->
+                </div>
+                </div>
+                <div class="col-4 circle">
+                    <img id="minhaImagem" src="{% static 'img/circulo/padrao.jpg' %}" alt="Imagem do Círculo">
+                </div>
+                <div class="col-4">
+                    <br>
+                    <br>
+                    <br>
+                    <!-- <div class="col d-flex justify-content-around">
+                        <p>
+                            <button onclick="trocarImagem('{% static 'img/circulo/cs.jpg' %}')" class="btn btn-light rounded-circle custom-btn custom-btn-cs" data-toggle="collapse"
+                                data-target="#collapseCS" aria-expanded="false" aria-controls="collapseCS">
+                                <img src="https://img.icons8.com/?size=100&id=jzahITKncvRL&format=png&color=000000" alt="CS:GO" class="icon">
+                            </button>
+                        </p>
+                        <p>
+                            <button onclick="trocarImagem('{% static 'img/circulo/fortnite.jpg' %}')" class="btn btn-light rounded-circle custom-btn custom-btn-fort" data-toggle="collapse"
+                                data-target="#collapseFortnite" aria-expanded="false" aria-controls="collapseFortnite">
+                                <img src="https://img.icons8.com/?size=100&id=O0TwjsZIu4Ua&format=png&color=000000" alt="Fortnite" class="icon">
+                            </button>
+                        </p>
+                    </div>
+                </div>                 -->
+        </div>
+    </div>
+    </br>
+    </br>
+    </br>
+    </br>
+    </br>
+    <div class="container">
+        <div class="collapse" id="collapseVava">
+            <div class="card card-body">
+                <h3>VALORANT</h3>
+                <a>Suba com seus aliados e alcance o topo da elite, consiga o rank 
+                    mais elevado e domine os inimigos</a>
+                </br>
+                <div class="col d-flex justify-content-around">
+                    <img src="{% static 'img/vava/r1.png' %}" alt="CS" class="icon">
+                    <img src="{% static 'img/vava/r2.png' %}" alt="CS" class="icon">
+                    <img src="{% static 'img/vava/r3.png' %}" alt="CS" class="icon">
+                    <img src="{% static 'img/vava/r4.png' %}" alt="CS" class="icon">
+                    <img src="{% static 'img/vava/r5.png' %}" alt="CS" class="icon">
+                    <img src="{% static 'img/vava/r6.png' %}" alt="CS" class="icon">
+                    <img src="{% static 'img/vava/r7.png' %}" alt="CS" class="icon">
+                    <img src="{% static 'img/vava/r8.png' %}" alt="CS" class="icon">
+                </div> 
+                </br>
+                </br>
+                </br>
+                </br>
+            </div>
+        </div>
+        </br>
+        </br>
+        </br>
+    </div>
+    <div class="container">
+        <div class="collapse" id="collapseLol">
+            <div class="card card-body">
+                <h3>League of Legends</h3>
+                <a>Suba com seus aliados e alcance o topo da elite, consiga o rank
+                    mais elevado e domine os inimigos</a>
+                </br>
+                <div class="col d-flex justify-content-around">
+                    <img src="{% static 'img/lol/r1.png' %}" alt="CS" class="icon">
+                    <img src="{% static 'img/lol/r2.png' %}" alt="CS" class="icon">
+                    <img src="{% static 'img/lol/r3.png' %}" alt="CS" class="icon">
+                    <img src="{% static 'img/lol/r4.png' %}" alt="CS" class="icon">
+                    <img src="{% static 'img/lol/r5.png' %}" alt="CS" class="icon">
+                    <img src="{% static 'img/lol/r6.png' %}" alt="CS" class="icon">
+                    <img src="{% static 'img/lol/r7.png' %}" alt="CS" class="icon">
+                    <img src="{% static 'img/lol/r8.png' %}" alt="CS" class="icon">
+                    <img src="{% static 'img/lol/r9.png' %}" alt="CS" class="icon">
+                </div>
+                </br>
+                </br>
+                </br>
+                </br>
+            </div>
+        </div>
+        </br>
+        </br>
+        </br>
+    </div>
+    <div class="container">
+        <div class="collapse" id="collapseCS">
+            <div class="card card-body">
+                <h3>COUNTER STRIKE</h3>
+                <a>Suba com seus aliados e alcance o topo da elite, consiga o rank
+                    mais elevado e domine os inimigos</a>
+                </br>
+                <div class="col d-flex justify-content-around">
+                    <img src="{% static 'img/cs/r1.png' %}" alt="CS" class="icon">
+                    <img src="{% static 'img/cs/r2.png' %}" alt="CS" class="icon">
+                    <img src="{% static 'img/cs/r3.png' %}" alt="CS" class="icon">
+                    <img src="{% static 'img/cs/r4.png' %}" alt="CS" class="icon">
+                    <img src="{% static 'img/cs/r5.png' %}" alt="CS" class="icon">
+                    <img src="{% static 'img/cs/r6.png' %}" alt="CS" class="icon">
+                    <img src="{% static 'img/cs/r7.png' %}" alt="CS" class="icon">
+                </div>
+                </br>
+                </br>
+                </br>
+                </br>
+            </div>
+        </div>
+        </br>
+        </br>
+        </br>
+    </div>
+    <div class="container">
+        <div class="collapse" id="collapseFortnite">
+            <div class="card card-body">
+                <h3>FORTNITE</h3>
+                <a>Suba com seus aliados e alcance o topo da elite, consiga o rank
+                    mais elevado e domine os inimigos</a>
+                </br>
+                <div class="col d-flex justify-content-around">
+                    <img src="{% static 'img/fortnite/r1.png' %}" alt="CS" class="icon">
+                    <img src="{% static 'img/fortnite/r2.png' %}" alt="CS" class="icon">
+                    <img src="{% static 'img/fortnite/r3.png' %}" alt="CS" class="icon">
+                    <img src="{% static 'img/fortnite/r4.png' %}" alt="CS" class="icon">
+                    <img src="{% static 'img/fortnite/r5.png' %}" alt="CS" class="icon">
+                    <img src="{% static 'img/fortnite/r6.png' %}" alt="CS" class="icon">
+                    <img src="{% static 'img/fortnite/r7.png' %}" alt="CS" class="icon">
+                    <img src="{% static 'img/fortnite/r8.png' %}" alt="CS" class="icon">
+                </div>
+                </br>
+                </br>
+                </br>
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col d-flex justify-content-around">
+            <h2>ENCONTRE SEUS ALIADOS</h2>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-2">
+            <a href="{% url 'login' %}" class="btn btn-success btn-lg btn-block">LOGIN</a>
+        </div>
+        <div class="col-2">
+            <a href="{% url 'CriarUsuario' %}" class="btn btn-warning btn-lg btn-block">CRIAR CONTA</a>
+        </div>
+    </div>
+    
+
+    <!-- JavaScript (Opcional) -->
+    <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
+    <script>
+        function trocarImagem(imagem) {
+            const imgElement = document.getElementById('minhaImagem');
+            imgElement.src = imagem; // Troca a imagem com base no botão clicado
+        }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>   
 </body>
-</html>

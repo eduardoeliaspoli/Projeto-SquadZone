@@ -1,5 +1,8 @@
 from django.shortcuts import render, redirect, HttpResponse
-from .forms import UsuarioForm, TimeForms,TreinoForms
+
+from .forms import UsuarioForm, TimeForms
+from django.contrib.auth.views import LoginView
+from django.urls import reverse_lazy
 
 
 def index(request):
@@ -59,4 +62,3 @@ def treinos(request):
     #class Meta:
      #   model = Treino
       #  fields = ['time_1','time_2', 'data_treino','hora','agenda']
-
