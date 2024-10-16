@@ -7,8 +7,8 @@ class UsuarioAdmin(admin.ModelAdmin):
     search_fields = ('nome', 'email')
 
     def save_model(self, request, obj, form, change):
-        if not change:  # Se for uma criação
-            obj.nivel_reputacao = 3  # Define o valor padrão aqui
+        if not change:  
+            obj.nivel_reputacao = 3  
         super().save_model(request, obj, form, change)
 
 

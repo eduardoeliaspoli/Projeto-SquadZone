@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'squadzone',
     'agenda',
-    'ambiente',
+    'chat',
 ]
 
 MIDDLEWARE = [
@@ -107,7 +107,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "pt-br"
 
 TIME_ZONE = "UTC"
 
@@ -118,12 +118,9 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
+# Diretórios onde o Django irá procurar os arquivos estáticos
 
 STATIC_URL = "static/"
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR,'static/'),
-    ]
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
@@ -131,6 +128,9 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media/')
-
-LOGIN_REDIRECT_URL = 'home'  # URL para redirecionar após o login
-LOGOUT_REDIRECT_URL = 'login'  # URL para redirecionar após o logout
+PUSHER_APP_ID = '1878739'
+PUSHER_KEY = '067e31123de297cc050e'
+PUSHER_SECRET = '5c66f0f576984d20a6cf'
+PUSHER_CLUSTER = 'sa1'
+LOGIN_REDIRECT_URL = '/'  # URL para redirecionar após o login
+LOGOUT_REDIRECT_URL = '/login/'  # URL para redirecionar após logout

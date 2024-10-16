@@ -3,6 +3,7 @@ from . import views
 from agenda import views as agenda_views
 from django.conf.urls.static import static
 from django.conf import settings
+from django.contrib.auth import views as auth_views
 
 
 
@@ -15,3 +16,4 @@ urlpatterns =  [
     path('agenda/', include('agenda.urls')),
     path('login/', views.login_view, name='login'),
 ]
+

@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, HttpResponse
+
 from .forms import UsuarioForm, TimeForms
 from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy
@@ -7,11 +8,6 @@ from django.urls import reverse_lazy
 def index(request):
     return render(request, 'index.html')
 
-#def index(request):
-#    postagens = Postagem.objects.all()3
-#     return render(request, 'index.html', {'postagens': postagens})
-
-#
 def criarTime(request):
     if request.method == 'POST':
         form = TimeForms(request.POST,request.FILES)
@@ -34,8 +30,6 @@ def criarUsuario(request):
             usuario = form.save(commit=False)
             usuario.nivel_reputacao = 3
             usuario.save()
-
-
             return redirect('sucesso')
     else:
         form = UsuarioForm()  # Inicializa o formulário para requisições GET
@@ -48,15 +42,23 @@ def agenda(request):
 
 
 def sucesso(request):
+
     return HttpResponse('Cadastrado com sucesso')
 
-def home(request):
-    return render(request,'ambiente/index.html')
+def treinos(request):
+    if request.method == 'POST':
+        form = TreinoForms(request.POST,request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('sucesso')
+        else:
+            print(form.errors)
+    else:
+        form = TreinoForms()
+        
+    return render(request, 'novoTreino.html', {'form': form})
 
-class CustomLoginView(LoginView):
-    template_name = 'login.html'  # Nome do seu template
-    success_url = reverse_lazy('home')  # URL para redirecionar após o login bem-sucedido
-
-# Se você não quiser usar uma view baseada em classe, pode fazer assim:
-def login_view(request):
-    return LoginView.as_view(template_name='login.html')(request)
+#class TreinoForms(forms.ModelForm):
+    #class Meta:
+     #   model = Treino
+      #  fields = ['time_1','time_2', 'data_treino','hora','agenda']
