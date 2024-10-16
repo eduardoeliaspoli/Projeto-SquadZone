@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat com Histórico</title>
     <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
 </head>
+
 <body>
     <div id="chat">
         {% for message in messages %}
-            <div>{{ message.content }}</div>
+        <div>{{ message.user.username }}: {{ message.content }}</div>
         {% endfor %}
     </div>
     <input type="text" id="message" placeholder="Digite sua mensagem">
@@ -21,10 +23,6 @@
         });
 
         const channel = pusher.subscribe('chat');
-        channel.bind('message', function(data) {
-            const chat = document.getElementById('chat');
-            chat.innerHTML += `<div>${data.message}</div>`;
-        });
 
         function sendMessage() {
             const messageInput = document.getElementById('message');
@@ -41,6 +39,12 @@
 
             messageInput.value = '';
         }
+        channel.bind('message', function (data) {
+            const chat = document.getElementById('chat');
+            chat.innerHTML += `<div>${data.username}: ${data.message}</div>`;  // Adicione o nome do usuário
+        });
+
     </script>
 </body>
+
 </html>

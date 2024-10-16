@@ -3,6 +3,7 @@ from . import views
 from agenda import views as agenda_views
 from django.conf.urls.static import static
 from django.conf import settings
+from django.contrib.auth import views as auth_views
 
 
 
@@ -12,10 +13,7 @@ urlpatterns =  [
     path('cadastrar/usuario', views.criarUsuario, name='CriarUsuario'),
     path('cadastrar/time', views.criarTime, name='criarTime'),
     path('sucesso/', views.sucesso, name='sucesso'),
-<<<<<<< Updated upstream
     path('agenda/', include('agenda.urls')),
-]
-=======
-    path('treinos/', views.treinos, name = 'criarTreino')
-]
->>>>>>> Stashed changes
+    path('treinos/', views.treinos, name = 'criarTreino'),
+    path('login/', auth_views.LoginView.as_view(), name='login'),
+    path('treinos/', views.treinos, name = 'criarTreino')]

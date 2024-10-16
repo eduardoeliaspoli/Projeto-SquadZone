@@ -1,27 +1,16 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adicionar Evento</title>
-</head>
-<body>
-    <h1>Adicionar Novo Evento</h1>
-    <form method="POST">
-        {% csrf_token %}
-        <label for="titulo">Título:</label>
-        <input type="text" id="titulo" name="titulo" required><br><br>
-
-        <label for="descricao">Descrição:</label>
-        <textarea id="descricao" name="descricao"></textarea><br><br>
-
-        <label for="inicio">Início:</label>
-        <input type="datetime-local" id="inicio" name="inicio" required><br><br>
-
-        <label for="fim">Fim:</label>
-        <input type="datetime-local" id="fim" name="fim"><br><br>
-
-        <button type="submit">Adicionar Evento</button>
-    </form>
-</body>
-</html>
+    <!DOCTYPE html>
+    <html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Adicionar Evento</title>
+    </head>
+    <body>
+        <h1>Adicionar Novo Evento</h1>
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Adicionar">
+        </form>
+    </body>
+    </html>

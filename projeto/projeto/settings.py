@@ -118,9 +118,9 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
+# Diretórios onde o Django irá procurar os arquivos estáticos
 
 STATIC_URL = "static/"
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
@@ -134,3 +134,5 @@ PUSHER_KEY = '067e31123de297cc050e'
 PUSHER_SECRET = '5c66f0f576984d20a6cf'
 PUSHER_CLUSTER = 'sa1'
 
+LOGIN_REDIRECT_URL = '/'  # URL para redirecionar após o login
+LOGOUT_REDIRECT_URL = '/login/'  # URL para redirecionar após logout
