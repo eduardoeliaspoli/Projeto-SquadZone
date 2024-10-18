@@ -1,7 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
- 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -11,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
     <title>SQUADZONE</title>
-   
+
     <style>
         body {
             font-family: "Silkscreen", sans-serif;
@@ -21,53 +20,54 @@
             align-items: center;
             height: 100vh;
         }
- 
+
         .container {
             display: flex; /* Flexbox para alinhar imagem e formulário */
             align-items: center; /* Alinha verticalmente no centro */
         }
- 
+
         .circle img {
             width: 100%;
             height: auto;
         }
- 
+
         .card {
             width: 22rem; /* Largura do cartão de login */
             background-color: #6a6e72;
             box-shadow: 0 10px 200px #f5f7fa;
         }
+
+        .error-message {
+            color: red;
+        }
     </style>
 </head>
- 
+
 <body>
     <div class="container">
         <div class="circle">
             <img src="{% static 'img/login/onibus.png' %}" alt="Imagem do Ônibus">
         </div>
-       
+
         <div class="login-container">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title text-center">Login</h5>
-                    <form>
+                    <form method="post">
                         {% csrf_token %}
-                        {{ form.as_p }}
-                        <!-- <div class="form-group">
-                            <label for="username">Nome de Usuário</label>
-                            <input type="text" class="form-control" id="username" placeholder="Digite seu nome de usuário">
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Senha</label>
-                            <input type="password" class="form-control" id="password" placeholder="Digite sua senha">
-                        </div> -->
-                        <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+                        {{ form.as_p }} <!-- Renderiza o formulário com campos de login -->
+                        
+                        {% if form.non_field_errors %}
+                            <div class="error-message">{{ form.non_field_errors }}</div> <!-- Exibe erros não específicos -->
+                        {% endif %}
+                        
+                        <button type="submit" class="btn btn-primary">Entrar</button> <!-- Botão estilizado -->
                     </form>
                 </div>
             </div>
         </div>
     </div>
- 
+
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
             crossorigin="anonymous"></script>
@@ -78,6 +78,5 @@
             integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
             crossorigin="anonymous"></script>
 </body>
- 
+
 </html>
- 
