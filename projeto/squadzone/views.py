@@ -58,7 +58,8 @@ def treinos(request):
         
     return render(request, 'novoTreino.html', {'form': form})
 
-#class TreinoForms(forms.ModelForm):
-    #class Meta:
-     #   model = Treino
-      #  fields = ['time_1','time_2', 'data_treino','hora','agenda']
+def login_view(request):
+    return LoginView.as_view(template_name='login.html')(request)
+ 
+def login_view(request):
+    return LoginView.as_view(template_name='login.html')(request)
