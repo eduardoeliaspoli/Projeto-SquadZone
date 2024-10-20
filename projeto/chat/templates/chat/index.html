@@ -6,44 +6,381 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat com Histórico</title>
     <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+    <link rel="stylesheet" href="">
 </head>
+<style>
+    body {
+        font-family: "Silkscreen", sans-serif;
+        background-color: #211921;
+
+    }
+
+    #geral {
+        width: 100%;
+        max-width: 80ch;
+        margin: 20px auto;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    #chat {
+        flex-grow: 1;
+        padding: 20px;
+        background-color: #212121;
+        overflow-y: auto;
+        height: 80ch;
+
+    }
+
+    .message {
+        margin-bottom: 15px;
+        padding: 10px 15px;
+        border-radius: 2px;
+        position: relative;
+    }
+
+    .message strong {
+        color: #1a90d8;
+    }
+
+    .message:nth-child(odd) {
+        background-color: #e6f7ff;
+    }
+
+    .message:nth-child(even) {
+        background-color: #ffebee;
+    }
+
+    #user {
+        padding: 15px;
+        background-color: #c1e1c1;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    #barra-input {
+        display: flex;
+        padding: 15px;
+        background-color: #ffffff;
+        border-top: 2px solid #ccc;
+    }
+
+    /* 
+    #barra-input input[type="text"] {
+        flex-grow: 1;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 20px;
+        font-size: 16px;
+    } */
+
+    #barra-input button {
+        width: auto;
+        height: 5ch;
+        margin-left: 10px;
+        border: none;
+        border-radius: 20px;
+        background-color: #1a90d8;
+        color: white;
+        font-size: 24px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color 0.5s;
+    }
+
+    #barra-input button:hover {
+        background-color: #00aeff;
+    }
+
+    .brutalist-container {
+        position: relative;
+        width: 80%;
+
+        font-family: monospace;
+    }
+
+
+    .brutalist-input {
+        width: 90%;
+        height: 30px;
+        padding: 10px;
+        font-size: 18px;
+        font-weight: bold;
+        color: #000;
+        background-color: #fff;
+        border: 4px solid #000;
+        position: relative;
+        overflow: hidden;
+        border-radius: 0;
+        outline: none;
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        box-shadow: 5px 5px 0 #000, 10px 10px 0 #4a90e2;
+    }
+
+    @keyframes glitch {
+        0% {
+            transform: translate(0);
+        }
+
+        20% {
+            transform: translate(-2px, 2px);
+        }
+
+        40% {
+            transform: translate(-2px, -2px);
+        }
+
+        60% {
+            transform: translate(2px, 2px);
+        }
+
+        80% {
+            transform: translate(2px, -2px);
+        }
+
+        100% {
+            transform: translate(0);
+        }
+    }
+
+    .brutalist-input:focus {
+        animation: focus-pulse 4s cubic-bezier(0.25, 0.8, 0.25, 1) infinite,
+            glitch 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) infinite;
+    }
+
+    .brutalist-input:focus::after {
+        content: "";
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        background: white;
+        z-index: -1;
+    }
+
+    .brutalist-input:focus::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: black;
+        z-index: -2;
+        clip-path: inset(0 100% 0 0);
+        animation: glitch-slice 4s steps(2, end) infinite;
+    }
+
+    @keyframes glitch-slice {
+        0% {
+            clip-path: inset(0 100% 0 0);
+        }
+
+        10% {
+            clip-path: inset(0 5% 0 0);
+        }
+
+        20% {
+            clip-path: inset(0 80% 0 0);
+        }
+
+        30% {
+            clip-path: inset(0 10% 0 0);
+        }
+
+        40% {
+            clip-path: inset(0 50% 0 0);
+        }
+
+        50% {
+            clip-path: inset(0 30% 0 0);
+        }
+
+        60% {
+            clip-path: inset(0 70% 0 0);
+        }
+
+        70% {
+            clip-path: inset(0 15% 0 0);
+        }
+
+        80% {
+            clip-path: inset(0 90% 0 0);
+        }
+
+        90% {
+            clip-path: inset(0 5% 0 0);
+        }
+
+        100% {
+            clip-path: inset(0 100% 0 0);
+        }
+    }
+
+    .brutalist-label {
+        position: absolute;
+        left: -3px;
+        top: -35px;
+        font-size: 14px;
+        font-weight: bold;
+        color: #fff;
+        background-color: #000;
+        padding: 5px 10px;
+        transform: rotate(-1deg);
+        z-index: 1;
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    .brutalist-input:focus+.brutalist-label {
+        transform: rotate(0deg) scale(1.05);
+        background-color: #4a90e2;
+    }
+
+    .smooth-type {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .smooth-type::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: linear-gradient(90deg, #fff 0%, rgba(255, 255, 255, 0) 100%);
+        z-index: 1;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .smooth-type:focus::before {
+        opacity: 1;
+        animation: type-gradient 2s linear infinite;
+    }
+
+    @keyframes type-gradient {
+        0% {
+            background-position: 300px 0;
+        }
+
+        100% {
+            background-position: 0 0;
+        }
+    }
+
+    .brutalist-input::placeholder {
+        color: #888;
+        transition: color 0.3s ease;
+    }
+
+    .brutalist-input:focus::placeholder {
+        color: transparent;
+    }
+
+    .brutalist-input:focus {
+        animation: focus-pulse 4s cubic-bezier(0.25, 0.8, 0.25, 1) infinite;
+    }
+
+    @keyframes focus-pulse {
+
+        0%,
+        100% {
+            border-color: #000;
+        }
+
+        50% {
+            border-color: #4a90e2;
+        }
+    }
+
+    /* From Uiverse.io by alexreyes091 */
+    .btn {
+        padding: 1rem 2rem;
+        font-weight: 700;
+        background: rgb(255, 255, 255);
+        color: blueviolet;
+        cursor: pointer;
+        border-radius: 0.5rem;
+        border-bottom: 2px solid blueviolet;
+        border-right: 2px solid blueviolet;
+        border-top: 2px solid white;
+        border-left: 2px solid white;
+        transition-duration: 1s;
+        transition-property: border-top, border-left, border-bottom, border-right,
+            box-shadow;
+    }
+
+    .btn:hover {
+        transition-duration: 0.5;
+        border-top: 2px solid blueviolet;
+        border-left: 2px solid blueviolet;
+        border-bottom: 2px solid rgb(238, 103, 238);
+        border-right: 2px solid rgb(238, 103, 238);
+        box-shadow: rgba(240, 46, 170, 0.4) 5px 5px, rgba(240, 46, 170, 0.3) 10px 10px,
+            rgba(240, 46, 170, 0.2) 15px 15px;
+    }
+</style>
 
 <body>
-    <div id="chat">
-        {% for message in messages %}
-        <div>{{ message.user.username }}: {{ message.content }}</div>
-        {% endfor %}
+    {{ include}}
+    <div id="geral">
+        <div id="chat">
+            {% for message in messages %}
+            <div class="message">
+                <strong>{{ message.user.username|upper }}:</strong> {{ message.content }}
+            </div>
+            {% endfor %}
+        </div>
+        <div id="barra-input">
+            <div class="brutalist-container">
+                <input placeholder="Escreva algo para todos aqui!" class="brutalist-input smooth-type" type="text"
+                    id="message" />
+                <label class="brutalist-label">{{ user|upper }}, VOCÊ IRA DIZER:</label>
+            </div>
+            <button id='botao' onclick="sendMessage()" class="btn">Enviar</button>
+        </div>
+        <div id="user">Seja bem-vindo ao chat! Lembre-se sem xingamentos aqui! &#128545;</div>
     </div>
-    <input type="text" id="message" placeholder="Digite sua mensagem">
-    <button onclick="sendMessage()">Enviar</button>
-
     <script>
         const pusher = new Pusher('067e31123de297cc050e', {
             cluster: 'sa1'
         });
 
         const channel = pusher.subscribe('chat');
+        const chat = document.getElementById("chat");
+        chat.scrollTop = chat.scrollHeight;
+        
+        channel.bind('message', function (data) {
+            const chat = document.getElementById('chat');
+            chat.innerHTML += `<div class="message" style=""><span style="color: #1a90d8;font-weight: bolder;">${data.username.toUpperCase()}</span>: ${data.message}</div>`;
+            chat.scrollTop = chat.scrollHeight;
+        });
 
         function sendMessage() {
             const messageInput = document.getElementById('message');
-            const message = messageInput.value;
+            const message = messageInput.value.trim();
 
-            fetch('/chat/send_message/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    'X-CSRFToken': '{{ csrf_token }}',
-                },
-                body: `message=${encodeURIComponent(message)}`
-            });
-
-            messageInput.value = '';
+            if (message !== '') {
+                fetch('/chat/send_message/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'X-CSRFToken': '{{ csrf_token }}',
+                    },
+                    body: `message=${encodeURIComponent(message)}`
+                })
+                    .then(data => {
+                        messageInput.value = ''; // Limpa o campo de entrada
+                    })
+            } else {
+                alert("A mensagem não pode estar vazia.");  // Alerta se a mensagem estiver vazia
+            }
         }
-        channel.bind('message', function (data) {
-            const chat = document.getElementById('chat');
-            chat.innerHTML += `<div>${data.username}: ${data.message}</div>`;  // Adicione o nome do usuário
-        });
-
     </script>
 </body>
 
