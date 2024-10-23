@@ -16,10 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('', include('squadzone.urls')),
     path('admin/', admin.site.urls),
     path('agenda/', include('agenda.urls')),
     path('chat/', include('chat.urls')),
-]
+    path('login/', include('squadzone.urls')),
+    ]
