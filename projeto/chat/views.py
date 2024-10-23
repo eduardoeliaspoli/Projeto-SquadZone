@@ -13,7 +13,7 @@ pusher_client = pusher.Pusher(
     ssl=True
 )
 
-def index(request):
+def chat_index(request):
     messages = Message.objects.all().order_by('created_at')
     return render(request, 'chat/index.html', {'messages': messages})
 

@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect, HttpResponse
-
 from .forms import UsuarioForm, TimeForms
 from django.contrib.auth.views import LoginView
-from django.urls import reverse_lazy
+from django.contrib.auth import logout
+from django.views.generic import TemplateView
 
 
 def index(request):
@@ -63,3 +63,10 @@ def login_view(request):
  
 def login_view(request):
     return LoginView.as_view(template_name='login.html')(request)
+
+def logout_view(request):
+    logout(request)
+    return redirect('login')
+
+class LogoutTemplateView(TemplateView):
+    template_name = 'logoute.html'

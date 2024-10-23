@@ -1,10 +1,7 @@
 from django.urls import path,include
 from . import views
-from agenda import views as agenda_views
-from django.conf.urls.static import static
-from django.conf import settings
 from django.contrib.auth import views as auth_views
-from .views import login_view
+from .views import logout_view
 
 
 
@@ -15,6 +12,8 @@ urlpatterns =  [
     path('cadastrar/time', views.criarTime, name='criarTime'),
     path('sucesso/', views.sucesso, name='sucesso'),
     path('agenda/', include('agenda.urls')),
-    path('login/', auth_views.LoginView.as_view(), name='login'),
+    path('Entrar/', auth_views.LoginView.as_view(), name='login'),
+    path('logout/', logout_view, name='logout'),
+
 ]
 

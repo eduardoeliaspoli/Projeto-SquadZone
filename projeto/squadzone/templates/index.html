@@ -13,7 +13,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
-        <title>SQUADZONE</title>
+    <title>SQUADZONE</title>
 
     <style>
         body {
@@ -21,6 +21,7 @@
             font-weight: 400;
             font-style: normal;
         }
+
         .circle {
             width: 200%;
             /* Tamanho do círculo */
@@ -44,10 +45,13 @@
         }
 
         .circle img {
-            width: 100%; /* A imagem ocupará toda a largura do círculo */
-            height: 100%; /* A imagem ocupará toda a altura do círculo */
-            object-fit: cover; /* A imagem irá cobrir todo o círculo */
-            
+            width: 100%;
+            /* A imagem ocupará toda a largura do círculo */
+            height: 100%;
+            /* A imagem ocupará toda a altura do círculo */
+            object-fit: cover;
+            /* A imagem irá cobrir todo o círculo */
+
         }
 
         .btn-round {
@@ -83,21 +87,33 @@
             height: 80px;
             /* Ajuste o tamanho do ícone */
         }
+
         .custom-btn-fort {
-            background-color: #1a90d8; /* Cor personalizada */
-            border-color: #1a90d8; /* Cor da borda, se houver */
+            background-color: #1a90d8;
+            /* Cor personalizada */
+            border-color: #1a90d8;
+            /* Cor da borda, se houver */
         }
+
         .custom-btn-cs {
-            background-color: #FF5733; /* Cor personalizada */
-            border-color: #ff4953; /* Cor da borda, se houver */
+            background-color: #FF5733;
+            /* Cor personalizada */
+            border-color: #ff4953;
+            /* Cor da borda, se houver */
         }
+
         .custom-btn-lol {
-            background-color: #c79b3b; /* Cor personalizada */
-            border-color: #c79b3b; /* Cor da borda, se houver */
+            background-color: #c79b3b;
+            /* Cor personalizada */
+            border-color: #c79b3b;
+            /* Cor da borda, se houver */
         }
+
         .custom-btn-vava {
-            background-color: #ff4953; /* Cor personalizada */
-            border-color: #ff4953; /* Cor da borda, se houver */
+            background-color: #ff4953;
+            /* Cor personalizada */
+            border-color: #ff4953;
+            /* Cor da borda, se houver */
         }
     </style>
 </head>
@@ -106,11 +122,13 @@
         <div class="container-fluid">
             <!-- Item na extrema esquerda -->
             <a class="navbar-brand" href="#">
-                <img src="{% static 'img/logo.png' %}" alt="Logo" width="40" height="40" class="d-inline-block align-text-center">
+                <img src="{% static 'img/logo.png' %}" alt="Logo" width="40" height="40"
+                    class="d-inline-block align-text-center">
                 SQUADZONE
             </a>
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
@@ -147,48 +165,61 @@
     </br>
     </br>
     <div class="container">
+        <a href="{% url 'chat_index' %}">Ir para o Chat</a>
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit">Sair</button>
+        </form>
         <div class="row">
             <div class="col-4">
                 </br>
                 </br>
                 </br>
                 <div class="col d-flex justify-content-around">
-                     <p>
-                        <button onclick="trocarImagem('{% static 'img/circulo/vava2.jpg' %}')" class="btn btn-light rounded-circle custom-btn custom-btn-vava" data-toggle="collapse"
+                    <p>
+                        <button onclick="trocarImagem('{% static 'img/circulo/vava2.jpg' %}')"
+                            class="btn btn-light rounded-circle custom-btn custom-btn-vava" data-toggle="collapse"
                             data-target="#collapseVava" aria-expanded="false" aria-controls="collapseVava">
-                            <img src="https://img.icons8.com/?size=100&id=GSHWFnD9x56D&format=png&color=000000" alt="Valorant" class="icon">
+                            <img src="https://img.icons8.com/?size=100&id=GSHWFnD9x56D&format=png&color=000000"
+                                alt="Valorant" class="icon">
                         </button>
                     </p>
                     <p>
-                        <button onclick="trocarImagem('{% static 'img/circulo/lol.jpg' %}')" class="btn btn-light rounded-circle custom-btn custom-btn-lol" data-toggle="collapse"
+                        <button onclick="trocarImagem('{% static 'img/circulo/lol.jpg' %}')"
+                            class="btn btn-light rounded-circle custom-btn custom-btn-lol" data-toggle="collapse"
                             data-target="#collapseLol" aria-expanded="false" aria-controls="collapseLol">
-                            <img src="https://img.icons8.com/?size=100&id=101282&format=png&color=000000" alt="League of Legends" class="icon">
+                            <img src="https://img.icons8.com/?size=100&id=101282&format=png&color=000000"
+                                alt="League of Legends" class="icon">
                         </button>
                     </p>
                 </div>
+            </div>
+            <div class="col-4 circle">
+                <img id="minhaImagem" src="{% static 'img/circulo/padrao.jpg' %}" alt="Imagem do Círculo">
+            </div>
+            <div class="col-4">
+                <br>
+                <br>
+                <br>
+                <div class="col d-flex justify-content-around">
+                    <p>
+                        <button onclick="trocarImagem('{% static 'img/circulo/cs.jpg' %}')"
+                            class="btn btn-light rounded-circle custom-btn custom-btn-cs" data-toggle="collapse"
+                            data-target="#collapseCS" aria-expanded="false" aria-controls="collapseCS">
+                            <img src="https://img.icons8.com/?size=100&id=jzahITKncvRL&format=png&color=000000"
+                                alt="CS:GO" class="icon">
+                        </button>
+                    </p>
+                    <p>
+                        <button onclick="trocarImagem('{% static 'img/circulo/fortnite.jpg' %}')"
+                            class="btn btn-light rounded-circle custom-btn custom-btn-fort" data-toggle="collapse"
+                            data-target="#collapseFortnite" aria-expanded="false" aria-controls="collapseFortnite">
+                            <img src="https://img.icons8.com/?size=100&id=O0TwjsZIu4Ua&format=png&color=000000"
+                                alt="Fortnite" class="icon">
+                        </button>
+                    </p>
                 </div>
-                <div class="col-4 circle">
-                    <img id="minhaImagem" src="{% static 'img/circulo/padrao.jpg' %}" alt="Imagem do Círculo">
-                </div>
-                <div class="col-4">
-                    <br>
-                    <br>
-                    <br>
-                     <div class="col d-flex justify-content-around">
-                        <p>
-                            <button onclick="trocarImagem('{% static 'img/circulo/cs.jpg' %}')" class="btn btn-light rounded-circle custom-btn custom-btn-cs" data-toggle="collapse"
-                                data-target="#collapseCS" aria-expanded="false" aria-controls="collapseCS">
-                                <img src="https://img.icons8.com/?size=100&id=jzahITKncvRL&format=png&color=000000" alt="CS:GO" class="icon">
-                            </button>
-                        </p>
-                        <p>
-                            <button onclick="trocarImagem('{% static 'img/circulo/fortnite.jpg' %}')" class="btn btn-light rounded-circle custom-btn custom-btn-fort" data-toggle="collapse"
-                                data-target="#collapseFortnite" aria-expanded="false" aria-controls="collapseFortnite">
-                                <img src="https://img.icons8.com/?size=100&id=O0TwjsZIu4Ua&format=png&color=000000" alt="Fortnite" class="icon">
-                            </button>
-                        </p>
-                    </div>
-                </div>                
+            </div>
         </div>
     </div>
     </br>
@@ -200,7 +231,7 @@
         <div class="collapse" id="collapseVava">
             <div class="card card-body">
                 <h3>VALORANT</h3>
-                <a>Suba com seus aliados e alcance o topo da elite, consiga o rank 
+                <a>Suba com seus aliados e alcance o topo da elite, consiga o rank
                     mais elevado e domine os inimigos</a>
                 </br>
                 <div class="col d-flex justify-content-around">
@@ -212,7 +243,7 @@
                     <img src="{% static 'img/vava/r6.png' %}" alt="CS" class="icon">
                     <img src="{% static 'img/vava/r7.png' %}" alt="CS" class="icon">
                     <img src="{% static 'img/vava/r8.png' %}" alt="CS" class="icon">
-                </div> 
+                </div>
                 </br>
                 </br>
                 </br>
@@ -314,7 +345,7 @@
             <a href="{% url 'CriarUsuario' %}" class="btn btn-warning btn-lg btn-block">CRIAR CONTA</a>
         </div>
     </div>
-    
+
 
     <!-- JavaScript (Opcional) -->
     <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
@@ -332,5 +363,5 @@
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-        crossorigin="anonymous"></script>   
+        crossorigin="anonymous"></script>
 </body>
