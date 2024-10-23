@@ -14,32 +14,21 @@ pusher_client = pusher.Pusher(
 )
 
 def index(request):
-    messages = Message.objects.all().order_by('-created_at')
+    messages = Message.objects.all().order_by('created_at')
     return render(request, 'chat/index.html', {'messages': messages})
 
 
-# def send_message(request):
-#     if request.method == 'POST':
-#         message_content = request.POST.get('message')
-#         message = Message.objects.create(content=message_content)
-
-#         pusher_client.trigger('chat', 'message', {
-#             'message': message.content
-#         })
-
-#         return JsonResponse({'status': 'Message sent'})
-#     return JsonResponse({'status': 'Invalid request'}, status=400)
-
 def send_message(request):
-    if request.method == 'POST' and request.user.is_authenticated:  # Verifica se o usuário está autenticado
+    if request.method == 'POST' and request.user.is_authenticated:
         message_content = request.POST.get('message')
         
         # Salvar a mensagem no arquivo
         message = Message.objects.create(content=message_content, user=request.user)
 
+
         pusher_client.trigger('chat', 'message', {
             'message': message.content,
-            'username': message.user.username  # Envie o nome do usuário para o Pusher
+            'username': message.user.username 
         })
 
         return JsonResponse({'status': 'Message sent'})
