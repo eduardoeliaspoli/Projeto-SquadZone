@@ -17,5 +17,3 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'projeto.settings')
 application = get_wsgi_application()
 
 
-def chat_view(request):
-    return render(request, 'chat/chat.html')  # Verifique se o caminho para o template está correto
