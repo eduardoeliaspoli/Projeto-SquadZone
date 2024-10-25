@@ -8,9 +8,21 @@
     <link rel="stylesheet" href="{% static 'css/forum.css' %}">
 </head>
 <header>
-    {% include 'navbar.html' %}
-</header>
+    
+</header>   
 <body>
-    {% include 'chat/index.html' %}
+    <ul>
+        {% for postagem in postagens %}
+            <li>
+                <h2><a href="{{ postagem.slug }}">{{postagem.titulo}}</a></h2>
+                <p>{{ postagem.descricao|truncatewords:500}}</p>
+                <p>{{ postagem.autor }}</p>
+                <p>{{ postagem.criado_em }}</p>
+                <p><a href="categoria/{{ postagem.categoria.slug }}">{{postagem.categoria}}</a></p>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
 </body>
 </html>

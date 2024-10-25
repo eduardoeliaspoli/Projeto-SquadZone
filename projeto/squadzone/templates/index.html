@@ -5,18 +5,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <title>SQUADZONE</title>
+    <script>
+        function trocarImagem(imagem) {
+            const imgElement = document.getElementById('minhaImagem');
+            imgElement.src = imagem; // Troca a imagem com base no botão clicado
+        }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
 </head>
 <header>
     {% include 'navbar.html' %}
 </header>
-
 <body>
     </br>
     </br>
@@ -38,7 +52,7 @@
                 <div class="col d-flex justify-content-around">
                     <p>
                         <button onclick="trocarImagem('{% static 'img/circulo/vava2.jpg' %}')"
-                            class="btn btn-light rounded-circle custom-btn custom-btn-vava" data-toggle="collapse"
+                            class="btn rounded-circle custom-btn custom-btn-vava" data-toggle="collapse"
                             data-target="#collapseVava" aria-expanded="false" aria-controls="collapseVava">
                             <img src="https://img.icons8.com/?size=100&id=GSHWFnD9x56D&format=png&color=000000"
                                 alt="Valorant" class="icon">
@@ -46,7 +60,7 @@
                     </p>
                     <p>
                         <button onclick="trocarImagem('{% static 'img/circulo/lol.jpg' %}')"
-                            class="btn btn-light rounded-circle custom-btn custom-btn-lol" data-toggle="collapse"
+                            class="btn rounded-circle custom-btn custom-btn-lol" data-toggle="collapse"
                             data-target="#collapseLol" aria-expanded="false" aria-controls="collapseLol">
                             <img src="https://img.icons8.com/?size=100&id=101282&format=png&color=000000"
                                 alt="League of Legends" class="icon">
@@ -64,7 +78,7 @@
                 <div class="col d-flex justify-content-around">
                     <p>
                         <button onclick="trocarImagem('{% static 'img/circulo/cs.jpg' %}')"
-                            class="btn btn-light rounded-circle custom-btn custom-btn-cs" data-toggle="collapse"
+                            class="btn rounded-circle custom-btn custom-btn-cs" data-toggle="collapse"
                             data-target="#collapseCS" aria-expanded="false" aria-controls="collapseCS">
                             <img src="https://img.icons8.com/?size=100&id=jzahITKncvRL&format=png&color=000000"
                                 alt="CS:GO" class="icon">
@@ -72,7 +86,7 @@
                     </p>
                     <p>
                         <button onclick="trocarImagem('{% static 'img/circulo/fortnite.jpg' %}')"
-                            class="btn btn-light rounded-circle custom-btn custom-btn-fort" data-toggle="collapse"
+                            class="btn rounded-circle custom-btn custom-btn-fort" data-toggle="collapse"
                             data-target="#collapseFortnite" aria-expanded="false" aria-controls="collapseFortnite">
                             <img src="https://img.icons8.com/?size=100&id=O0TwjsZIu4Ua&format=png&color=000000"
                                 alt="Fortnite" class="icon">
@@ -205,23 +219,4 @@
             <a href="{% url 'CriarUsuario' %}" class="btn btn-warning btn-lg btn-block">CRIAR CONTA</a>
         </div>
     </div>
-
-
-    <!-- JavaScript (Opcional) -->
-    <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
-    <script>
-        function trocarImagem(imagem) {
-            const imgElement = document.getElementById('minhaImagem');
-            imgElement.src = imagem; // Troca a imagem com base no botão clicado
-        }
-    </script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-        crossorigin="anonymous"></script>
 </body>
