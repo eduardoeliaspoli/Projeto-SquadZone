@@ -25,48 +25,61 @@
     </br>
     </br>
     <div class="container">
+        <a href="{% url 'chat_index' %}">Ir para o Chat</a>
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit">Sair</button>
+        </form>
         <div class="row">
             <div class="col-4">
                 </br>
                 </br>
                 </br>
                 <div class="col d-flex justify-content-around">
-                     <p>
-                        <button onclick="trocarImagem('{% static 'img/circulo/vava2.jpg' %}')" class="btn btn-light rounded-circle custom-btn custom-btn-vava" data-toggle="collapse"
+                    <p>
+                        <button onclick="trocarImagem('{% static 'img/circulo/vava2.jpg' %}')"
+                            class="btn btn-light rounded-circle custom-btn custom-btn-vava" data-toggle="collapse"
                             data-target="#collapseVava" aria-expanded="false" aria-controls="collapseVava">
-                            <img src="https://img.icons8.com/?size=100&id=GSHWFnD9x56D&format=png&color=000000" alt="Valorant" class="icon">
+                            <img src="https://img.icons8.com/?size=100&id=GSHWFnD9x56D&format=png&color=000000"
+                                alt="Valorant" class="icon">
                         </button>
                     </p>
                     <p>
-                        <button onclick="trocarImagem('{% static 'img/circulo/lol.jpg' %}')" class="btn btn-light rounded-circle custom-btn custom-btn-lol" data-toggle="collapse"
+                        <button onclick="trocarImagem('{% static 'img/circulo/lol.jpg' %}')"
+                            class="btn btn-light rounded-circle custom-btn custom-btn-lol" data-toggle="collapse"
                             data-target="#collapseLol" aria-expanded="false" aria-controls="collapseLol">
-                            <img src="https://img.icons8.com/?size=100&id=101282&format=png&color=000000" alt="League of Legends" class="icon">
+                            <img src="https://img.icons8.com/?size=100&id=101282&format=png&color=000000"
+                                alt="League of Legends" class="icon">
                         </button>
                     </p>
                 </div>
+            </div>
+            <div class="col-4 circle">
+                <img id="minhaImagem" src="{% static 'img/circulo/padrao.jpg' %}" alt="Imagem do Círculo">
+            </div>
+            <div class="col-4">
+                <br>
+                <br>
+                <br>
+                <div class="col d-flex justify-content-around">
+                    <p>
+                        <button onclick="trocarImagem('{% static 'img/circulo/cs.jpg' %}')"
+                            class="btn btn-light rounded-circle custom-btn custom-btn-cs" data-toggle="collapse"
+                            data-target="#collapseCS" aria-expanded="false" aria-controls="collapseCS">
+                            <img src="https://img.icons8.com/?size=100&id=jzahITKncvRL&format=png&color=000000"
+                                alt="CS:GO" class="icon">
+                        </button>
+                    </p>
+                    <p>
+                        <button onclick="trocarImagem('{% static 'img/circulo/fortnite.jpg' %}')"
+                            class="btn btn-light rounded-circle custom-btn custom-btn-fort" data-toggle="collapse"
+                            data-target="#collapseFortnite" aria-expanded="false" aria-controls="collapseFortnite">
+                            <img src="https://img.icons8.com/?size=100&id=O0TwjsZIu4Ua&format=png&color=000000"
+                                alt="Fortnite" class="icon">
+                        </button>
+                    </p>
                 </div>
-                <div class="col-4 circle">
-                    <img id="minhaImagem" src="{% static 'img/circulo/padrao.jpg' %}" alt="Imagem do Círculo">
-                </div>
-                <div class="col-4">
-                    <br>
-                    <br>
-                    <br>
-                     <div class="col d-flex justify-content-around">
-                        <p>
-                            <button onclick="trocarImagem('{% static 'img/circulo/cs.jpg' %}')" class="btn btn-light rounded-circle custom-btn custom-btn-cs" data-toggle="collapse"
-                                data-target="#collapseCS" aria-expanded="false" aria-controls="collapseCS">
-                                <img src="https://img.icons8.com/?size=100&id=jzahITKncvRL&format=png&color=000000" alt="CS:GO" class="icon">
-                            </button>
-                        </p>
-                        <p>
-                            <button onclick="trocarImagem('{% static 'img/circulo/fortnite.jpg' %}')" class="btn btn-light rounded-circle custom-btn custom-btn-fort" data-toggle="collapse"
-                                data-target="#collapseFortnite" aria-expanded="false" aria-controls="collapseFortnite">
-                                <img src="https://img.icons8.com/?size=100&id=O0TwjsZIu4Ua&format=png&color=000000" alt="Fortnite" class="icon">
-                            </button>
-                        </p>
-                    </div>
-                </div>                
+            </div>
         </div>
     </div>
     </br>
@@ -78,7 +91,7 @@
         <div class="collapse" id="collapseVava">
             <div class="card card-body">
                 <h3>VALORANT</h3>
-                <a>Suba com seus aliados e alcance o topo da elite, consiga o rank 
+                <a>Suba com seus aliados e alcance o topo da elite, consiga o rank
                     mais elevado e domine os inimigos</a>
                 </br>
                 <div class="col d-flex justify-content-around">
@@ -90,7 +103,7 @@
                     <img src="{% static 'img/vava/r6.png' %}" alt="CS" class="icon">
                     <img src="{% static 'img/vava/r7.png' %}" alt="CS" class="icon">
                     <img src="{% static 'img/vava/r8.png' %}" alt="CS" class="icon">
-                </div> 
+                </div>
                 </br>
                 </br>
                 </br>
@@ -192,7 +205,7 @@
             <a href="{% url 'CriarUsuario' %}" class="btn btn-warning btn-lg btn-block">CRIAR CONTA</a>
         </div>
     </div>
-    
+
 
     <!-- JavaScript (Opcional) -->
     <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
@@ -210,5 +223,5 @@
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-        crossorigin="anonymous"></script>   
+        crossorigin="anonymous"></script>
 </body>

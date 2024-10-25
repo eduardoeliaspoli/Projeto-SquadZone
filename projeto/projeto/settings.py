@@ -138,4 +138,4 @@ PUSHER_KEY = '067e31123de297cc050e'
 PUSHER_SECRET = '5c66f0f576984d20a6cf'
 PUSHER_CLUSTER = 'sa1'
 LOGIN_REDIRECT_URL = '/'  # URL para redirecionar após o login
-LOGOUT_REDIRECT_URL = '/login/'  # URL para redirecionar após logout
+LOGOUT_REDIRECT_URL = '/'  # URL para redirecionar após logout
