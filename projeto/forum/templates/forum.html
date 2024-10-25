@@ -1,0 +1,16 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fórum Squadzone</title>
+    <link rel="stylesheet" href="{% static 'css/forum.css' %}">
+</head>
+<header>
+    {% include 'navbar.html' %}
+</header>
+<body>
+    {% include 'chat/index.html' %}
+</body>
+</html>
