@@ -27,4 +27,3 @@ urlpatterns = [
     path('login/', include('squadzone.urls')),
     path('forum/', include('forum.urls')),
     ]
-
