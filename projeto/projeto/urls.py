@@ -26,5 +26,3 @@ urlpatterns = [
     path('chat/', include('chat.urls')),
     path('login/', include('squadzone.urls')),
     path('forum/', include('forum.urls')),
-    ]
-
