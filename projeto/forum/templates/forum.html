@@ -19,6 +19,11 @@
                 <p>{{ postagem.autor }}</p>
                 <p>{{ postagem.criado_em }}</p>
                 <p><a href="categoria/{{ postagem.categoria.slug }}">{{postagem.categoria}}</a></p>
+                {% if postagem.imagem_capa %}
+                <img src="{{ postagem.imagem_capa.url }}" width="400px" alt="">
+                {% else %}
+                <p>No image available</p> <!-- Mensagem alternativa -->
+                {% endif %} 
             </li>
         {% endfor %}
     </ul>

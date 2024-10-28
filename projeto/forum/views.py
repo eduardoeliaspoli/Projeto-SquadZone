@@ -10,7 +10,7 @@ def forum(request):
 def filtrar_categoria(request,slug_categoria):
     categoria = get_object_or_404(Categoria, slug = slug_categoria)
     postagens = Postagem.objects.filter(categoria=categoria)
-    return render(request,"receitas_categoria.html",{'postagens':postagens})
+    return render(request,"categorias.html",{'postagens':postagens})
 
 def cadastrar_categoria(request):
     if request.method == 'POST':
@@ -25,6 +25,7 @@ def cadastrar_categoria(request):
 def cadastrar_postagem(request):
     if request.method == 'POST':
         form = PostagemForm(request.POST, request.FILES)
+        
         if form.is_valid():
             form.save()
             return HttpResponse('Cadastro Efetuado')

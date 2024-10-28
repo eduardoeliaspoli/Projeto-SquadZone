@@ -7,7 +7,7 @@ from django.conf import settings
 urlpatterns = [
     path('', views.forum, name='forum'),
     path('cadastrar/comentario',views.cadastrar_comentario, name='cadastrar_postagem'),
-    path('cadastrar/postagem',views.cadastrar_postagem, name='cadastrar_postagem'),
+    path('cadastrar/postagem',views.cadastrar_postagem, name='cadastro'),
     path('cadastrar/categoria',views.cadastrar_categoria, name='cadastrar_categoria'),
     path('categoria/<slug:slug_categoria>/', views.filtrar_categoria,name='filtrar_categoria')
 
