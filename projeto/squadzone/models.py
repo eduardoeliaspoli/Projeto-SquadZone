@@ -117,5 +117,3 @@ class Agenda(models.Model):
 
     def __str__(self):
         return f'Agenda para {self.data_atual} às {self.hora}'
-
-

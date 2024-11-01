@@ -17,6 +17,7 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
@@ -110,7 +111,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "pt-br"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "America/Sao_Paulo"
 
 USE_I18N = True
 
@@ -121,9 +122,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 # Diretórios onde o Django irá procurar os arquivos estáticos
 
-STATIC_URL = "static/"
+STATIC_URL = "/static/"
 STATICFILES_DIRS = [
-    BASE_DIR / "static",
+    BASE_DIR / "projeto/static",
 ]
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -137,4 +138,4 @@ PUSHER_KEY = '067e31123de297cc050e'
 PUSHER_SECRET = '5c66f0f576984d20a6cf'
 PUSHER_CLUSTER = 'sa1'
 LOGIN_REDIRECT_URL = '/'  # URL para redirecionar após o login
-LOGOUT_REDIRECT_URL = '/login/'  # URL para redirecionar após logout
+LOGOUT_REDIRECT_URL = '/'  # URL para redirecionar após logout

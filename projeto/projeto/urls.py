@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
+from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
     path('', include('squadzone.urls')),
@@ -24,4 +25,5 @@ urlpatterns = [
     path('agenda/', include('agenda.urls')),
     path('chat/', include('chat.urls')),
     path('login/', include('squadzone.urls')),
-    ]
+    path('forum/', include('forum.urls')),
+]

@@ -1,0 +1,75 @@
+body {
+    font-family: "Silkscreen", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    background-color: #505656;
+}
+.circle {
+    width: 200%;
+    height: 200%;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    border: 5px solid #000000;
+    box-shadow: 0 10px 200px #f5f7fa;
+}
+
+.circle img {
+    width: 100%; /* A imagem ocupará toda a largura do círculo */
+    height: 100%; /* A imagem ocupará toda a altura do círculo */
+    object-fit: cover; /* A imagem irá cobrir todo o círculo */
+    
+}
+
+.btn-round {
+    width: 60px;
+    /* Ajuste para o tamanho desejado */
+    height: 60px;
+    /* Deve ser igual à largura para manter a forma redonda */
+    font-size: 24px;
+    /* Tamanho da fonte do ícone ou texto */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.custom-btn {
+    width: 100px;
+    /* Largura do botão */
+    height: 100px;
+    /* Altura do botão deve ser igual à largura para ser redondo */
+    display: flex;
+    /* Para centralizar o conteúdo */
+    align-items: center;
+    /* Centraliza verticalmente */
+    justify-content: center;
+    /* Centraliza horizontalmente */
+    padding: 0;
+    /* Remove o padding padrão */
+}
+
+.icon {
+    width: 80px;
+    /* Ajuste o tamanho do ícone */
+    height: 80px;
+    /* Ajuste o tamanho do ícone */
+}
+.custom-btn-fort {
+    background-color: #1a90d8; /* Cor personalizada */
+    border-color: #1a90d8; /* Cor da borda, se houver */
+}
+.custom-btn-cs {
+    background-color: #FF5733; /* Cor personalizada */
+    border-color: #ff4953; /* Cor da borda, se houver */
+}
+.custom-btn-lol {
+    background-color: #c79b3b; /* Cor personalizada */
+    border-color: #c79b3b; /* Cor da borda, se houver */
+}
+.custom-btn-vava {
+    background-color: #ff4953; /* Cor personalizada */
+    border-color: #ff4953; /* Cor da borda, se houver */
+}

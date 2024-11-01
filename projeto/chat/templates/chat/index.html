@@ -6,12 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat com Histórico</title>
     <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
-    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.js"></script>
+
 </head>
 <style>
     body {
         font-family: "Silkscreen", sans-serif;
         background-color: #211921;
+        display: grid;
+        grid-auto-flow: column;
 
     }
 
@@ -324,6 +328,32 @@
         box-shadow: rgba(240, 46, 170, 0.4) 5px 5px, rgba(240, 46, 170, 0.3) 10px 10px,
             rgba(240, 46, 170, 0.2) 15px 15px;
     }
+
+    @keyframes shake {
+        0% {
+            transform: translate(1px, 0);
+        }
+
+        25% {
+            transform: translate(-1px, 0);
+        }
+
+        50% {
+            transform: translate(1px, 0);
+        }
+
+        75% {
+            transform: translate(-1px, 0);
+        }
+
+        100% {
+            transform: translate(0, 0);
+        }
+    }
+
+    .shake {
+        animation: shake 0.5s;
+    }
 </style>
 
 <body>
@@ -332,8 +362,9 @@
         <div id="chat">
             {% for message in messages %}
             <div class="message">
-                <strong>{{ message.user.username|upper }}:</strong> {{ message.content }}
+                <strong>{{ message.user.username|upper }}:</strong> {{ message.content }} | {{ message.created_at|date:"H:i" }}
             </div>
+            
             {% endfor %}
         </div>
         <div id="barra-input">
@@ -345,8 +376,8 @@
             <button id='botao' onclick="sendMessage()" class="btn">Enviar</button>
         </div>
         <div id="user">Seja bem-vindo ao chat! Lembre-se sem xingamentos aqui! &#128545;</div>
-    </div>
     <script>
+        const dataAtual = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
         const pusher = new Pusher('067e31123de297cc050e', {
             cluster: 'sa1'
         });
@@ -354,10 +385,10 @@
         const channel = pusher.subscribe('chat');
         const chat = document.getElementById("chat");
         chat.scrollTop = chat.scrollHeight;
-        
+
         channel.bind('message', function (data) {
             const chat = document.getElementById('chat');
-            chat.innerHTML += `<div class="message" style=""><span style="color: #1a90d8;font-weight: bolder;">${data.username.toUpperCase()}</span>: ${data.message}</div>`;
+            chat.innerHTML += `<div class="message" style=""><span style="color: #1a90d8;font-weight: bolder;">${data.username.toUpperCase()}</span>: ${data.message} | ${dataAtual}</div>`;
             chat.scrollTop = chat.scrollHeight;
         });
 
@@ -375,10 +406,21 @@
                     body: `message=${encodeURIComponent(message)}`
                 })
                     .then(data => {
-                        messageInput.value = ''; // Limpa o campo de entrada
-                    })
+                        messageInput.value = '';
+                        button.style.backgroundColor = '#4caf50'; 
+                        setTimeout(() => {
+                            button.style.backgroundColor = '#1a90d8'; 
+                        }, 200);
+                    });
             } else {
-                alert("A mensagem não pode estar vazia.");  // Alerta se a mensagem estiver vazia
+                Toastify({
+                    text: "A mensagem não pode estar vazia.",
+                    duration: 1000,
+                    close: true,
+                    gravity: "bottom",
+                    position: 'left', 
+                    backgroundColor: "red",
+                }).showToast();
             }
         }
     </script>
