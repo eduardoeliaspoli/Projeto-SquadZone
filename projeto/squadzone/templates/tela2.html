@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <!-- Meta tags Obrigatórias -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+    <title>SQUADZONE</title>
+
+    <style>
+        body {
+            font-family: "Silkscreen", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        .circle {
+            width: 200%;
+            /* Tamanho do círculo */
+            height: 200%;
+            /* Tamanho do círculo */
+            border-radius: 50%;
+            /* Para deixar redondo */
+            overflow: hidden;
+            /* Para ocultar parte da imagem que sair do círculo */
+            display: flex;
+            /* Para centralizar a imagem */
+            align-items: center;
+            /* Centraliza verticalmente */
+            justify-content: center;
+            /* Centraliza horizontalmente */
+            margin: 0 auto;
+            /* Para centralizar o círculo na tela */
+            box-shadow: 0 10px 200px #f5f7fa;
+        }
+
+        .circle img {
+            width: 100%;
+            /* A imagem ocupará toda a largura do círculo */
+            height: 100%;
+            /* A imagem ocupará toda a altura do círculo */
+            object-fit: cover;
+            /* A imagem irá cobrir todo o círculo */
+
+        }
+
+        .btn-round {
+            width: 60px;
+            /* Ajuste para o tamanho desejado */
+            height: 60px;
+            /* Deve ser igual à largura para manter a forma redonda */
+            font-size: 24px;
+            /* Tamanho da fonte do ícone ou texto */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .custom-btn {
+            width: 100px;
+            /* Largura do botão */
+            height: 100px;
+            /* Altura do botão deve ser igual à largura para ser redondo */
+            display: flex;
+            /* Para centralizar o conteúdo */
+            align-items: center;
+            /* Centraliza verticalmente */
+            justify-content: center;
+            /* Centraliza horizontalmente */
+            padding: 0;
+            /* Remove o padding padrão */
+        }
+
+        .icon {
+            width: 80px;
+            /* Ajuste o tamanho do ícone */
+            height: 80px;
+            /* Ajuste o tamanho do ícone */
+        }
+    </style>
+</head>
+<header>
+    <style>
+        body {
+            background-color: #808080;
+            /* Fundo cinza */
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: space-between;
+            /* Para posicionar os elementos nas extremidades */
+            align-items: center;
+            /* Centraliza verticalmente */
+            padding: 0 50px;
+            /* Espaçamento lateral */
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* Centraliza horizontalmente */
+            position: relative;
+            /* Para posicionar o círculo corretamente */
+        }
+
+        .circle {
+            width: 180px;
+            /* Diâmetro do círculo */
+            height: 180px;
+            /* Diâmetro do círculo */
+            background-image: url("{% static 'img/jinx0.jpg' %}");
+            background-size: cover;
+            /* Para cobrir todo o círculo */
+            background-position: center;
+            /* Centralizar a imagem */
+            border-radius: 50%;
+            /* Para fazer o círculo */
+            border: 2px solid #08be26;
+            /* Borda do círculo */
+            position: absolute;
+            top: -75px;
+            /* Para posicionar o círculo acima do retângulo */
+            left: 50%;
+            /* Centraliza horizontalmente em relação ao retângulo */
+            transform: translateX(-50%);
+            /* Ajusta o círculo para centralizar */
+        }
+
+        .square {
+            width: 400px;
+            /* Tamanho dos quadrados */
+            height: 400px;
+            /* Tamanho dos quadrados */
+            background-color: #262525;
+            /* Cor dos quadrados */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .rectangle {
+            width: 300px;
+            height: 500px;
+            background-color: #000000;
+            position: relative;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            /* Adicionado para empilhar verticalmente */
+            justify-content: flex-end;
+            /* Alinha os itens ao final do retângulo */
+            padding: 10px;
+            /* Adicionado para espaçamento interno */
+        }
+
+        .profile-fields {
+            display: flex;
+            flex-direction: column;
+            /* Empilha os campos de texto verticalmente */
+        }
+
+        .profile-field {
+            width: 100%;
+            /* O campo ocupa toda a largura disponível */
+            padding: 8px;
+            /* Espaçamento interno */
+            margin: 10px 0;
+            /* Espaçamento entre os campos */
+            border-radius: 10px;
+            /* Bordas arredondadas */
+            border: 1px solid #ccc;
+            /* Borda clara */
+            font-size: 16px;
+            /* Tamanho da fonte */
+            background-color: #262525;
+            /* Cor de fundo do campo */
+            color: white;
+            /* Cor do texto */
+        }
+    </style>
+    </head>
+
+    <body style="background-color: #505656">
+        <header>
+        </header>
+
+        <div class="container">
+            <div class="rectangle">
+                <div class="circle"></div>
+                <div class="profile-fields">
+                    <input type="text" class="profile-field" placeholder="Nome Jogador">
+                    <input type="text" class="profile-field" placeholder="Região">
+                    <input type="text" class="profile-field" placeholder="Jogos que jogo">
+                    <input type="text" class="profile-field" placeholder="Nível no jogo">
+                </div>
+            </div>
+            <div class="circle"></div>
+        </div>
+        </div>
+        <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <!-- Item na extrema esquerda -->
+                <a class="navbar-brand" href="#">
+                    <img src="{% static 'img/logo.png' %}" alt="Logo" width="40" height="40"
+                        class="d-inline-block align-text-center">
+                    SQUADZONE
+                </a>
+                <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav mx-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">JOGOS</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">CAMPEONATOS</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">CURSOS</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">NOVIDADES</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="login.html">SKINS</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </nav>
+</header>
+
+<body style="background-color: #505656">
+    </br>
+    </br>
+    </br>
+    </br>
+    </br>
+    </br>
+    <div class="container">
+        <div class="row">
+            <div class="col-4">
+                </br>
+                </br>
+                </br>
+
+                <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+                    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+                    crossorigin="anonymous"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+                    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+                    crossorigin="anonymous"></script>
+                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+                    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+                    crossorigin="anonymous"></script>
+</body>
