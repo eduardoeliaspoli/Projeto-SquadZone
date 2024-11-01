@@ -29,9 +29,14 @@ def cadastrar_postagem(request):
         if form.is_valid():
             form.save()
             return HttpResponse('Cadastro Efetuado')
+        else:
+            # Se o formulário não for válido, renderize novamente com os erros
+            return render(request, 'cadastro.html', {'form': form})
     else:
         form = PostagemForm()
-        return render(request,'cadastro.html',{'form':form})
+    
+    return render(request, 'cadastro.html', {'form': form})
+
     
 def cadastrar_comentario(request):
     if request.method == 'POST':
