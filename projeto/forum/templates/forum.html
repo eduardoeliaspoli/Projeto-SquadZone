@@ -7,27 +7,28 @@
     <title>Fórum Squadzone</title>
     <link rel="stylesheet" href="{% static 'css/forum.css' %}">
 </head>
-<header>
+<body class='forum-page'>
+    <header>
+        {% include 'navbar.html' %}
+    </header>
     
-</header>   
-<body>
-    <ul>
-        {% for postagem in postagens %}
-            <li>
-                <h2><a href="{{ postagem.slug }}">{{postagem.titulo}}</a></h2>
-                <p>{{ postagem.descricao|truncatewords:500}}</p>
-                <p>{{ postagem.autor }}</p>
-                <p>{{ postagem.criado_em }}</p>
-                <p><a href="categoria/{{ postagem.categoria.slug }}">{{postagem.categoria}}</a></p>
-                {% if postagem.imagem_capa %}
-                <img src="{{ postagem.imagem_capa.url }}" width="400px" alt="">
-                {% else %}
-                <p>No image available</p> <!-- Mensagem alternativa -->
-                {% endif %} 
-            </li>
-        {% endfor %}
-    </ul>
-</body>
-</html>
+    <main class="container pt-5 mt-5"> <!-- Adicionando margem para o conteúdo abaixo da navbar -->
+        <ul>
+            {% for postagem in postagens %}
+                <li>
+                    <h2><a href="{{ postagem.slug }}">{{ postagem.titulo }}</a></h2>
+                    <p>{{ postagem.descricao|truncatewords:500 }}</p>
+                    <p><strong>Autor:</strong> {{ postagem.autor }}</p>
+                    <p><strong>Criado em:</strong> {{ postagem.criado_em }}</p>
+                    <p><strong>Categoria:</strong> <a href="categoria/{{ postagem.categoria.slug }}">{{ postagem.categoria }}</a></p>
+                    {% if postagem.imagem_capa %}
+                        <img src="{{ postagem.imagem_capa.url }}" width="400px" alt="">
+                    {% else %}
+                        <p>No image available</p>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    </main>
 </body>
 </html>
