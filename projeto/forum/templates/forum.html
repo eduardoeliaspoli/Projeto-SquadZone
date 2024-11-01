@@ -7,15 +7,14 @@
     <title>Fórum Squadzone</title>
     <link rel="stylesheet" href="{% static 'css/forum.css' %}">
 </head>
+<header class="navbar">
+    {% include 'navbar.html' %}
+</header>
 <body class='forum-page'>
-    <header>
-        {% include 'navbar.html' %}
-    </header>
-    
-    <main class="container pt-5 mt-5"> <!-- Adicionando margem para o conteúdo abaixo da navbar -->
-        <ul>
+    <main class="forum">
+        <ul class="postagens">
             {% for postagem in postagens %}
-                <li>
+                <li class="postagem">
                     <h2><a href="{{ postagem.slug }}">{{ postagem.titulo }}</a></h2>
                     <p>{{ postagem.descricao|truncatewords:500 }}</p>
                     <p><strong>Autor:</strong> {{ postagem.autor }}</p>
