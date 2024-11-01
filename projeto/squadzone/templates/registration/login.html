@@ -1,11 +1,12 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
@@ -16,14 +17,15 @@
             font-family: "Silkscreen", sans-serif;
             background-color: #192027;
             display: flex;
-            justify-content: center; /* Centraliza o conteúdo */
+            justify-content: center;
             align-items: center;
             height: 100vh;
         }
 
         .container {
-            display: flex; /* Flexbox para alinhar imagem e formulário */
-            align-items: center; /* Alinha verticalmente no centro */
+            display: flex;
+            align-items: center;
+            gap: 2rem;
         }
 
         .circle img {
@@ -32,13 +34,121 @@
         }
 
         .card {
-            width: 22rem; /* Largura do cartão de login */
-            background-color: #6a6e72;
-            box-shadow: 0 10px 200px #f5f7fa;
+            background-image: linear-gradient(163deg, #00ff75 0%, #3700ff 100%);
+            border-radius: 22px;
+            transition: all s;
+            width: 24rem;
+            box-shadow: 0px 0px 30px 1px rgba(0, 255, 117, 0.30);
         }
 
-        .error-message {
-            color: red;
+        /* Efeito hover para o card */
+        .card:hover {
+            box-shadow: 0px 0px 40px 1px rgba(0, 255, 117, 0.4);
+        }
+
+        .form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding-left: 2em;
+            padding-right: 2em;
+            padding-bottom: 0.4em;
+            background-color: #171717;
+            border-radius: 20px;
+        }
+
+        #heading {
+            text-align: center;
+            margin: 2em;
+            color: rgb(0, 255, 200);
+            font-size: 1.2em;
+        }
+
+        .field {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5em;
+            border-radius: 25px;
+            padding: 0.6em;
+            border: none;
+            outline: none;
+            color: white;
+            background-color: #171717;
+            box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
+        }
+
+        .input-icon {
+            height: 1.3em;
+            width: 1.3em;
+            fill: rgb(0, 255, 200);
+        }
+
+        .input-field {
+            background: none;
+            border: none;
+            outline: none;
+            width: 100%;
+            color: rgb(0, 255, 200);
+        }
+
+        /* Estilos para o auto preenchimento */
+        input:-webkit-autofill {
+            -webkit-box-shadow: inset 0 0 0 1000px #171717; /* Cor de fundo do campo */
+            -webkit-text-fill-color: rgb(0, 255, 200); /* Cor do texto */
+            font-family: "Silkscreen", sans-serif; /* Manter a mesma fonte */
+        }
+
+        input:-webkit-autofill::first-line {
+            font-family: "Silkscreen", sans-serif; /* Manter a mesma fonte */
+        }
+
+        input:-webkit-autofill:hover,
+        input:-webkit-autofill:focus {
+            -webkit-box-shadow: inset 0 0 0 1000px #171717; /* Cor de fundo do campo */
+            -webkit-text-fill-color: rgb(0, 255, 200); /* Cor do texto */
+            font-family: "Silkscreen", sans-serif; /* Garantir a mesma fonte em hover e focus */
+        }
+
+        .form .btn {
+            display: flex;
+            justify-content: center;
+            flex-direction: row;
+            margin-top: 2.5em;
+        }
+
+        .button1 {
+            padding: 0.5em;
+            padding-left: 1.1em;
+            padding-right: 1.1em;
+            border-radius: 5px;
+            margin-right: 0.5em;
+            border: none;
+            outline: none;
+            transition: .4s ease-in-out;
+            background-image: linear-gradient(163deg, #00ff75 0%, #3700ff 100%);
+            color: rgb(0, 0, 0);
+        }
+
+        .button1:hover {
+            background-image: linear-gradient(163deg, #00642f 0%, #13034b 100%);
+            color: rgb(0, 255, 200);
+        }
+
+        .button3 {
+            margin-bottom: 3em;
+            padding: 0.5em;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+            transition: .4s ease-in-out;
+            background-image: linear-gradient(163deg, #00ff75 0%, #3700ff 100%);
+            color: rgb(0, 0, 0);
+        }
+
+        .button3:hover {
+            background-image: linear-gradient(163deg, #a00000fa 0%, #d10050 100%);
+            color: rgb(255, 255, 255);
         }
     </style>
 </head>
@@ -51,32 +161,47 @@
 
         <div class="login-container">
             <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title text-center">Login</h5>
-                    <form method="post">
-                        {% csrf_token %}
-                        {{ form.as_p }} <!-- Renderiza o formulário com campos de login -->
-                        
-                        {% if form.non_field_errors %}
-                            <div class="error-message">{{ form.non_field_errors }}</div> <!-- Exibe erros não específicos -->
-                        {% endif %}
-                        
-                        <button type="submit" class="btn btn-primary">Entrar</button> <!-- Botão estilizado -->
-                    </form>
-                </div>
+                <form class="form" method="post">
+                    {% csrf_token %}
+                    <p id="heading">Bem-Vindo(a) de volta!</p>
+
+                    <div class="field">
+                        <svg viewBox="0 0 16 16" fill="currentColor" class="input-icon">
+                            <path
+                                d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z">
+                            </path>
+                        </svg>
+                        <input type="text" class="input-field" placeholder="Usuário" autocomplete="off" name="username">
+                    </div>
+
+                    <div class="field">
+                        <svg viewBox="0 0 16 16" fill="currentColor" class="input-icon">
+                            <path
+                                d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z">
+                            </path>
+                        </svg>
+                        <input type="password" class="input-field" placeholder="Senha" name="password">
+                    </div>
+
+                    {% if form.non_field_errors %}
+                    <div class="error-message">{{ form.non_field_errors }}</div>
+                    {% endif %}
+
+                    <div class="btn">
+                        <button type="submit" class="button1">Entrar</button>
+                    </div>
+                    <button type="button" class="button3">Esqueci minha senha</button>
+                </form>
             </div>
         </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-            crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-            crossorigin="anonymous"></script>
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-            crossorigin="anonymous"></script>
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>
