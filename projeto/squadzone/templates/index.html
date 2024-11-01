@@ -29,7 +29,43 @@
         crossorigin="anonymous"></script>
 </head>
 <header>
+<head>
     {% include 'navbar.html' %}
+</head>
+<header>
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <!-- Item na extrema esquerda -->
+            <a class="navbar-brand" href="#">
+                <img src="{% static 'img/logo.png' %}" alt="Logo" width="40" height="40" class="d-inline-block align-text-center">
+                SQUADZONE
+            </a>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">JOGOS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">CAMPEONATOS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">CURSOS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">NOVIDADES</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="login.html">SKINS</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </nav>
 </header>
 <body>
     </br>
@@ -88,7 +124,6 @@
                         </button>
                     </p>
                 </div>
-            </div>
         </div>
     </div>
     </br>
