@@ -1,11 +1,14 @@
-body{
-    height: 100vh;
-
+html, body {
+    height: 100%;
+    margin: 0;
 }
-
-:root {
-    --fc-border-color: black;
-    --fc-daygrid-event-dot-width: 5px;
-  }
-
-
+.calendar-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+#calendar {
+    max-width: 80%; /* Ajuste o tamanho do calendário aqui */
+    width: 100%;
+}
