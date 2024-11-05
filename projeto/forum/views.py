@@ -94,7 +94,7 @@ def cadastrar_comentario(request):
             return redirect('cadastro_sucesso')
     else:
         form = ComentarioForm()
-        return render(request,'cadastro.html',{'form':form})
+        return render(request,'cadastro_comentario.html',{'form':form})
     
 
 def cadastro_sucesso(request):
