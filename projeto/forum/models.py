@@ -22,6 +22,8 @@ class Postagem(models.Model):
     atualizado_em = models.DateTimeField(auto_now=True)
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
     imagem_capa = models.ImageField(upload_to='imagens_capa/', blank=True)
+    upvotes = models.IntegerField(default=0)
+    downvotes = models.IntegerField(default=0)
     
     class Meta:
         verbose_name_plural = 'Postagens'
@@ -42,3 +44,15 @@ class Comentario(models.Model):
     
     def __str__(self):
         return f'Post:{self.postagem}, Nome:{self.nome}'
+
+
+class Voto(models.Model):
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    postagem = models.ForeignKey(Postagem, on_delete=models.CASCADE)
+    tipo_voto = models.CharField(max_length=10)
+
+    class Meta:
+        unique_together = ('usuario', 'postagem')  
+
+    def __str__(self):
+        return f'{self.usuario.username} - {self.tipo_voto} na postagem {self.postagem.titulo}'
