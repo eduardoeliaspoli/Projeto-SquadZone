@@ -12,6 +12,7 @@ urlpatterns =  [
     path('cadastrar/time', views.criarTime, name='criarTime'),
     path('sucesso/', views.sucesso, name='sucesso'),
     path('agenda/', include('agenda.urls')),
+    path("signup/", views.signup, name="signup"),
     path('Entrar/', auth_views.LoginView.as_view(), name='login'),
     path('logout/', logout_view, name='logout'),
 

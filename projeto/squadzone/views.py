@@ -2,6 +2,25 @@ from django.shortcuts import render, redirect, HttpResponse
 from .forms import UsuarioForm, TimeForms, TreinoForms
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import logout
+from django.contrib.auth import login
+from .forms import SignUpForm
+
+def signup(request):
+    if request.method == "POST":
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)  # Loga o usuário automaticamente após o cadastro
+            return redirect("home")  # Redireciona para a página inicial ou outra página
+    else:
+        form = SignUpForm()
+    return render(request, "signup.html", {"form": form})
+
+
+
+
+
+
 
 
 def index(request):

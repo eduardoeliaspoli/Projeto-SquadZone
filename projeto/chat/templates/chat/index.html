@@ -362,9 +362,9 @@
         <div id="chat">
             {% for message in messages %}
             <div class="message">
-                <strong>{{ message.user.username|upper }}:</strong> {{ message.content }} | {{ message.created_at|date:"H:i" }}
+                <strong>{{ message.user.username|upper }}:</strong> {{ message.content }} | {{message.created_at|date:"H:i" }}
             </div>
-            
+
             {% endfor %}
         </div>
         <div id="barra-input">
@@ -376,54 +376,67 @@
             <button id='botao' onclick="sendMessage()" class="btn">Enviar</button>
         </div>
         <div id="user">Seja bem-vindo ao chat! Lembre-se sem xingamentos aqui! &#128545;</div>
-    <script>
-        const dataAtual = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-        const pusher = new Pusher('067e31123de297cc050e', {
-            cluster: 'sa1'
-        });
+        <script>
 
-        const channel = pusher.subscribe('chat');
-        const chat = document.getElementById("chat");
-        chat.scrollTop = chat.scrollHeight;
 
-        channel.bind('message', function (data) {
-            const chat = document.getElementById('chat');
-            chat.innerHTML += `<div class="message" style=""><span style="color: #1a90d8;font-weight: bolder;">${data.username.toUpperCase()}</span>: ${data.message} | ${dataAtual}</div>`;
+
+            const dataAtual = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            const pusher = new Pusher('067e31123de297cc050e', {
+                cluster: 'sa1'
+            });
+
+            const channel = pusher.subscribe('chat');
+            const chat = document.getElementById("chat");
             chat.scrollTop = chat.scrollHeight;
-        });
 
-        function sendMessage() {
-            const messageInput = document.getElementById('message');
-            const message = messageInput.value.trim();
+            channel.bind('message', function (data) {
+                const chat = document.getElementById('chat');
+                // const dataAtual = new Date().toLocaleString();  // Define `dataAtual` for displaying the current date and time
+                chat.innerHTML += `<div class="message" style=""><span style="color: #1a90d8;font-weight: bolder;">${data.username.toUpperCase()}</span>: ${data.message} | ${dataAtual}</div>`;
+                chat.scrollTop = chat.scrollHeight;
+            });
 
-            if (message !== '') {
-                fetch('/chat/send_message/', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                        'X-CSRFToken': '{{ csrf_token }}',
-                    },
-                    body: `message=${encodeURIComponent(message)}`
-                })
-                    .then(data => {
-                        messageInput.value = '';
-                        button.style.backgroundColor = '#4caf50'; 
-                        setTimeout(() => {
-                            button.style.backgroundColor = '#1a90d8'; 
-                        }, 200);
-                    });
-            } else {
-                Toastify({
-                    text: "A mensagem não pode estar vazia.",
-                    duration: 1000,
-                    close: true,
-                    gravity: "bottom",
-                    position: 'left', 
-                    backgroundColor: "red",
-                }).showToast();
+            document.addEventListener("keydown", function (event) {
+                const key = event.key; // Capture the pressed key
+                if (key === 'Enter') {
+                    sendMessage();
+                }
+            });
+
+            function sendMessage() {
+                const messageInput = document.getElementById('message');
+                const message = messageInput.value.trim();
+
+                if (message !== '') {
+                    fetch('/chat/send_message/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                            'X-CSRFToken': '{{ csrf_token }}',
+                        },
+                        body: `message=${encodeURIComponent(message)}`
+                    })
+                        .then(response => {
+                            messageInput.value = '';
+                            const button = document.getElementById('botao'); 
+                            button.style.backgroundColor = '#4caf50';
+                            setTimeout(() => {
+                                button.style.backgroundColor = '#1a90d8';
+                            }, 200);
+                        });
+                } else {
+                    Toastify({
+                        text: "A mensagem não pode estar vazia.",
+                        duration: 1000,
+                        close: true,
+                        gravity: "bottom",
+                        position: 'left',
+                        backgroundColor: "red",
+                    }).showToast();
+                }
             }
-        }
-    </script>
+
+        </script>
 </body>
 
 </html>
