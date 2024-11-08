@@ -7,9 +7,10 @@ class Usuario(models.Model):
     localizacao = models.CharField(max_length=255)
     data_nascimento = models.DateField()
     email = models.EmailField(unique=True)
-    senha = models.CharField(max_length=255)  # Considere usar `make_password` para senhas
-    nivel_reputacao = models.IntegerField(default=3)  # Padrão para 3
+    senha = models.CharField(max_length=255)
+    nivel_reputacao = models.IntegerField(default=3)  
     data_criacao = models.DateTimeField(auto_now_add=True)
+    foto_perfil = models.ImageField(upload_to='imagens_perfil/', blank=True)
 
     def __str__(self):
         return self.nome
