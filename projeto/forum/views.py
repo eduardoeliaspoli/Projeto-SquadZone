@@ -11,47 +11,47 @@ def forum(request):
 def votar_postagem(request, post_id, tipo_voto):
     postagem = Postagem.objects.get(id=post_id)
     
-    # Verifica se o usuário já votou nesta postagem
+    
     voto_existente = Voto.objects.filter(usuario=request.user, postagem=postagem).first()
 
     if tipo_voto == 'upvote':
         if voto_existente:
             if voto_existente.tipo_voto == 'upvote':
-                # Se já votou para cima, remove o voto
+               
                 postagem.upvotes -= 1
                 voto_existente.delete()
             else:
-                # Se votou para baixo, troca para cima
+               
                 postagem.upvotes += 1
                 postagem.downvotes -= 1
                 voto_existente.tipo_voto = 'upvote'
                 voto_existente.save()
         else:
-            # Novo voto
+            
             postagem.upvotes += 1
             Voto.objects.create(usuario=request.user, postagem=postagem, tipo_voto='upvote')
 
     elif tipo_voto == 'downvote':
         if voto_existente:
             if voto_existente.tipo_voto == 'downvote':
-                # Se já votou para baixo, remove o voto
+                
                 postagem.downvotes -= 1
                 voto_existente.delete()
             else:
-                # Se votou para cima, troca para baixo
+                
                 postagem.downvotes += 1
                 postagem.upvotes -= 1
                 voto_existente.tipo_voto = 'downvote'
                 voto_existente.save()
         else:
-            # Novo voto
+            
             postagem.downvotes += 1
             Voto.objects.create(usuario=request.user, postagem=postagem, tipo_voto='downvote')
 
-    postagem.save()  # Salva as alterações na postagem
+    postagem.save()  
 
-    return redirect('forum')  # Retorne para a página do fórum
-  # Redireciona para a página do fórum
+    return redirect('forum')
+  
 
 
 
@@ -78,7 +78,7 @@ def cadastrar_postagem(request):
             form.save()
             return HttpResponse('Cadastro Efetuado')
         else:
-            # Se o formulário não for válido, renderize novamente com os erros
+            
             return render(request, 'cadastro.html', {'form': form})
     else:
         form = PostagemForm()
@@ -86,15 +86,18 @@ def cadastrar_postagem(request):
     return render(request, 'cadastro.html', {'form': form})
 
     
-def cadastrar_comentario(request):
-    if request.method == 'POST':
-        form = ComentarioForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('cadastro_sucesso')
-    else:
-        form = ComentarioForm()
-        return render(request,'cadastro_comentario.html',{'form':form})
+def cadastrar_comentario(request, post_id):
+    postagem = get_object_or_404(Postagem, id=post_id) 
+    form = ComentarioForm(request.POST or None)
+
+    if form.is_valid():
+        comentario = form.save(commit=False)
+        comentario.postagem = postagem 
+        comentario.save()
+
+        return redirect('forum')  
+
+    return render(request, 'cadastrar_comentario.html', {'form': form, 'postagem': postagem})
     
 
 def cadastro_sucesso(request):
