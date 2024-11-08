@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar Comentário</title>
+</head>
+<body>
+    <h1>Adicionar Comentário</h1>
+
+    <!-- Exibe o título da postagem, para referência -->
+    <h2>Comentando em: {{ postagem.titulo }}</h2>
+
+    <!-- Formulário para adicionar comentário -->
+    <form method="POST" action="{% url 'cadastrar_comentario' post_id=postagem.id %}">
+        {% csrf_token %}
+        
+        <!-- Renderiza os campos do formulário -->
+        {{ form.as_p }}
+
+        <!-- Botão de enviar -->
+        <button type="submit">Enviar Comentário</button>
+    </form>
+
+    <!-- Link para voltar ao fórum -->
+    <a href="{% url 'forum' %}">Voltar ao Fórum</a>
+</body>
+</html>
