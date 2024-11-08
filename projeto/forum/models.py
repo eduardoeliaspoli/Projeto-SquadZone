@@ -10,8 +10,8 @@ class Categoria(models.Model):
     class Meta:
         verbose_name_plural = 'Categoria'
         
-        def __str__(self):
-            return self.nome
+    def __str__(self):
+        return self.nome
 
 class Postagem(models.Model):
     titulo = models.CharField(max_length=200, unique=True)
@@ -32,8 +32,8 @@ class Postagem(models.Model):
         return self.titulo
     
 class Comentario(models.Model):
-    postagem = models.ForeignKey(Postagem, on_delete=models.CASCADE)
-    nome = models.CharField(max_length=50)
+    postagem = models.ForeignKey(Postagem, on_delete=models.CASCADE,related_name='comentarios')
+    usuario = models.ForeignKey(User, on_delete = models.DO_NOTHING)
     email = models.EmailField()
     texto = models.TextField(max_length=280)
     criado_em = models.DateTimeField(auto_now=True)
@@ -43,7 +43,7 @@ class Comentario(models.Model):
         verbose_name_plural = 'Comentarios'
     
     def __str__(self):
-        return f'Post:{self.postagem}, Nome:{self.nome}'
+        return f'Post:{self.postagem}, {self.usuario.username}'
 
 
 class Voto(models.Model):

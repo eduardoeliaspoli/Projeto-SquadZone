@@ -1,58 +1,71 @@
-    {% load static %}
-    <!DOCTYPE html>
-    <html lang="pt-BR">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Fórum Squadzone</title>
-        <link rel="stylesheet" href="{% static 'css/forum.css' %}">
-    </head>
-    <header class="navbar">
-        {% include 'navbar.html' %}
-    </header>
-    <body class='forum-page'>
-        <main class="forum">
-            <ul class="postagens">
-                {% for postagem in postagens %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fórum Squadzone</title>
+    <link rel="stylesheet" href="{% static 'css/forum.css' %}">
+</head>
+<header class="navbar">
+    {% include 'navbar.html' %}
+</header>
+<body class='forum-page'>
+    <main class="forum">
+        <ul class="postagens">
+            {% for postagem in postagens %}
+            <li class="postagem">
+                <h2><a href="{{ postagem.slug }}">{{ postagem.titulo }}</a></h2>
+                <p>{{ postagem.descricao|truncatewords:500 }}</p>
+                <p><strong>Autor:</strong> {{ postagem.autor }}</p>
+                <p><strong>Criado em:</strong> {{ postagem.criado_em }}</p>
+                <p><strong>Categoria:</strong> <a href="categoria/{{ postagem.categoria.slug }}">{{ postagem.categoria }}</a></p>
+                {% if postagem.imagem_capa %}
+                    <img src="{{ postagem.imagem_capa.url }}" width="400px" alt="">
+                {% else %}
+                    <p>No image available</p>
+                {% endif %}
+                <div id="Relevante">
+                    <!-- Botão de voto "Relevante" -->
+                    <a href="{% url 'votar_postagem' postagem.id 'upvote' %}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" class="bi bi-caret-up" viewBox="0 0 16 16">
+                            <path d="M3.204 11h9.592L8 5.519zm-.753-.659 4.796-5.48a1 1 0 0 1 1.506 0l4.796 5.48c.566.647.106 1.659-.753 1.659H3.204a1 1 0 0 1-.753-1.659"/>
+                        </svg>
+                    </a>
                 
-                <li class="postagem">
-                    <h2><a href="{{ postagem.slug }}">{{ postagem.titulo }}</a></h2>
-                    <p>{{ postagem.descricao|truncatewords:500 }}</p>
-                    <p><strong>Autor:</strong> {{ postagem.autor }}</p>
-                    <p><strong>Criado em:</strong> {{ postagem.criado_em }}</p>
-                    <p><strong>Categorias:</strong> <a href="categoria/{{ postagem.categoria.slug }}">{{ postagem.categoria }}</a></p>
-                    {% if postagem.imagem_capa %}
-                        <img src="{{ postagem.imagem_capa.url }}" width="400px" alt="">
-                    {% else %}
-                        <p>No image available</p>
-                    {% endif %}
-                    <div id="Relevante">
-                        <!-- Botão de voto "Relevante" -->
-                        <a href="{% url 'votar_postagem' postagem.id 'upvote' %}">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" class="bi bi-caret-up" viewBox="0 0 16 16">
-                                <path d="M3.204 11h9.592L8 5.519zm-.753-.659 4.796-5.48a1 1 0 0 1 1.506 0l4.796 5.48c.566.647.106 1.659-.753 1.659H3.204a1 1 0 0 1-.753-1.659"/>
-                            </svg>
-                        </a>
-                    
-                        <!-- Contador de votos -->
-                        <p style="font-size: 24px; color: white;">{{ postagem.upvotes }}</p>
-                    
-                        <!-- Botão de voto "Irrelevante" -->
-                        <a href="{% url 'votar_postagem' postagem.id 'downvote' %}">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" class="bi bi-caret-down" viewBox="0 0 16 16">
-                                <path d="M3.204 5h9.592L8 10.481zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659"/>
-                            </svg>
-                        </a>
-                    
-                        <!-- Botão para adicionar comentários -->
-                        <a href="{% url 'cadastrar_comentario' postagem.id %}" class="btn-comentario">
-                            Adicionar Comentário
-                        </a>
-                    </div>
-                    
-                </li>            
-                {% endfor %}
-            </ul>
-        </main>
-    </body>
-    </html>
+                    <!-- Contador de votos -->
+                    <p style="font-size: 24px; color: white;">{{ postagem.upvotes }}</p>
+                
+                    <!-- Botão de voto "Irrelevante" -->
+                    <a href="{% url 'votar_postagem' postagem.id 'downvote' %}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" class="bi bi-caret-down" viewBox="0 0 16 16">
+                            <path d="M3.204 5h9.592L8 10.481zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659"/>
+                        </svg>
+                    </a>
+                
+                    <!-- Botão para adicionar comentários -->
+                    <a href="{% url 'cadastrar_comentario' postagem.id %}" class="btn-comentario">
+                        Adicionar Comentário
+                    </a>
+                </div>
+
+                <!-- Comentários da postagem -->
+                <div class="comentarios">
+                    <h3>Comentários</h3>
+                    {% for comentario in postagem.comentarios.all %}
+                        <div class="comentario">
+                            <p><strong>Autor:</strong> {{ comentario.usuario.username }}</p>
+                            <p><strong>Comentário:</strong> {{ comentario.texto }}</p>
+                            <p><em>Comentado em: {{ comentario.criado_em|date:"d/m/Y H:i" }}</em></p>
+                            <hr>
+                        </div>
+                    {% empty %}
+                        <p>Não há comentários para esta postagem.</p>
+                    {% endfor %}
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </main>
+</body>
+</html>

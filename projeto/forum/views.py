@@ -5,6 +5,13 @@ from django.contrib.auth.decorators import login_required
 
 def forum(request):
     postagens = Postagem.objects.all()
+    
+    # Imprime as postagens e seus comentários no terminal para verificar
+    for postagem in postagens:
+        print(postagem.titulo)
+        for comentario in postagem.comentarios.all():
+            print(f"  - Comentário: {comentario.texto}")
+    
     return render(request, 'forum.html', {'postagens': postagens})
 
 @login_required
@@ -60,6 +67,7 @@ def filtrar_categoria(request,slug_categoria):
     postagens = Postagem.objects.filter(categoria=categoria)
     return render(request,"categorias.html",{'postagens':postagens})
 
+@login_required
 def cadastrar_categoria(request):
     if request.method == 'POST':
         form = CategoriaForm(request.POST)
@@ -70,11 +78,14 @@ def cadastrar_categoria(request):
         form = CategoriaForm()
         return render(request,'cadastro.html',{'form':form})
 
+@login_required
 def cadastrar_postagem(request):
     if request.method == 'POST':
         form = PostagemForm(request.POST, request.FILES)
         
         if form.is_valid():
+            postagem = form.save(commit=False)
+            postagem.autor = request.user
             form.save()
             return HttpResponse('Cadastro Efetuado')
         else:
@@ -85,13 +96,14 @@ def cadastrar_postagem(request):
     
     return render(request, 'cadastro.html', {'form': form})
 
-    
+@login_required
 def cadastrar_comentario(request, post_id):
     postagem = get_object_or_404(Postagem, id=post_id) 
     form = ComentarioForm(request.POST or None)
 
     if form.is_valid():
         comentario = form.save(commit=False)
+        comentario.usuario = request.user
         comentario.postagem = postagem 
         comentario.save()
 

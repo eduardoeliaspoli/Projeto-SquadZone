@@ -13,8 +13,8 @@ class PostagemAdmin(admin.ModelAdmin):
     )
 
 class ComentarioAdmin(admin.ModelAdmin):
-    list_display = ('postagem', 'nome', 'email', 'criado_em', 'ativo')
-    list_display_links = ('postagem', 'nome', 'email', 'criado_em', 'ativo')
+    list_display = ('postagem', 'usuario', 'criado_em', 'ativo')
+    list_display_links = ('postagem', 'usuario', 'criado_em', 'ativo')
     list_filter = ('postagem', 'criado_em', 'ativo')
 
 class CategoriaAdmin(admin.ModelAdmin):
