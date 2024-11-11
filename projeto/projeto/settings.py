@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'agenda',
     'chat',
     'forum',
+    'friendship'
 ]
 
 MIDDLEWARE = [

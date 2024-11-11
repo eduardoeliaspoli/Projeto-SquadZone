@@ -14,6 +14,7 @@ urlpatterns =  [
     path('agenda/', include('agenda.urls')),
     path('Entrar/', auth_views.LoginView.as_view(), name='login'),
     path('logout/', logout_view, name='logout'),
+    path('criar-amizade/', views.criar_amizade, name='criar_amizade'),
 
 ]
 

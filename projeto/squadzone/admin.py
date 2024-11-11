@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Usuario, Jogo, PerfilJogo, Time, JogadorTime, Forum, Mentoria, Treino, Chat, Agenda
+from .models import Usuario, Jogo, PerfilJogo, Time, JogadorTime, Forum, Mentoria, Treino, Chat, Agenda,Amizade
 
 @admin.register(Usuario)
 class UsuarioAdmin(admin.ModelAdmin):
@@ -55,3 +55,10 @@ class ChatAdmin(admin.ModelAdmin):
 class AgendaAdmin(admin.ModelAdmin):
     list_display = ('data_atual', 'hora')
     search_fields = ('data_atual',)
+
+@admin.register(Amizade)
+class AmizadeAdmin(admin.ModelAdmin):
+    list_display = ('usuario', 'amigo', 'status', 'data_criacao')  # Exibir os campos relevantes
+    search_fields = ('usuario__nome', 'amigo__nome', 'status')  # Permite pesquisa por nome dos usuários e status
+    list_filter = ('status',)  # Filtro por status de amizade
+    ordering = ('data_criacao',)  # Ordenar as amizades pela data de criação

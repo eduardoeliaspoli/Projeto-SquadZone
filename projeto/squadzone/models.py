@@ -1,5 +1,4 @@
 from django.db import models
-from django import forms 
 from django.contrib.auth.hashers import make_password, check_password
 
 class Usuario(models.Model):
@@ -10,8 +9,7 @@ class Usuario(models.Model):
     senha = models.CharField(max_length=255)
     nivel_reputacao = models.IntegerField(default=3)  
     data_criacao = models.DateTimeField(auto_now_add=True)
-    foto_perfil = models.ImageField(upload_to='imagens_perfil/', blank=True)
-
+    
     def __str__(self):
         return self.nome
     
@@ -22,6 +20,7 @@ class Usuario(models.Model):
 
     def verificar_senha(self, senha):
         return check_password(senha, self.senha) 
+
 
 class Jogo(models.Model):
     nome = models.CharField(max_length=255)
@@ -40,6 +39,7 @@ class PerfilJogo(models.Model):
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='perfis')
     jogo = models.ForeignKey(Jogo, on_delete=models.CASCADE, related_name='perfis')
     tag = models.CharField(max_length=50, choices=MODALIDADE_CHOICES)
+    foto_perfil = models.ImageField(upload_to='imagens_perfil/', blank=True)
 
     def __str__(self):
         return f'{self.usuario} - {self.jogo}'
@@ -118,3 +118,28 @@ class Agenda(models.Model):
 
     def __str__(self):
         return f'Agenda para {self.data_atual} às {self.hora}'
+
+
+class Amizade(models.Model):
+    TAG_CHOICES = [
+        ('Ativo', 'Ativo'),
+        ('Pendente', 'Pendente'),
+        ('Bloqueio', 'Bloqueio')
+    ]
+
+    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='amizades_1')
+    amigo = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='amizades_2')
+    status = models.CharField(max_length=50, choices=TAG_CHOICES)
+    data_criacao = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['usuario', 'amigo'], name='amizade_unica')
+        ]
+
+    
+
+    def save(self, *args, **kwargs):
+        if self.usuario.id > self.amigo.id:
+            self.usuario, self.amigo = self.amigo, self.usuario
+        super().save(*args, **kwargs)

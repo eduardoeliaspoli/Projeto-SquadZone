@@ -1,7 +1,8 @@
-from django.shortcuts import render, redirect, HttpResponse
-from .forms import UsuarioForm, TimeForms, TreinoForms
+from django.shortcuts import render, redirect, HttpResponse,get_object_or_404
+from .forms import UsuarioForm, TimeForms, TreinoForms,AmizadeForm
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import logout
+from django.contrib import messages
  
  
 def index(request):
@@ -63,3 +64,22 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect('login')
+
+
+def criar_amizade(request):
+    if request.method == 'POST':
+        form = AmizadeForm(request.POST)
+        usuario = request.user
+        amigo = request.POST.get('amigo_id')
+        if usuario == amigo:
+            messages.error(request, "Você não pode adicionar a si mesmo como amigo.")
+            return redirect('criarAmizade')
+
+        if form.is_valid():
+            # Salvar a amizade
+            form.save()
+            return redirect('sucesso')  # Redireciona após o sucesso
+    else:
+        form = AmizadeForm()
+
+    return render(request, 'criarAmizade.html', {'form': form})

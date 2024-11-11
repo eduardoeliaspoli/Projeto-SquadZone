@@ -1,4 +1,4 @@
-from .models import Usuario, Jogo, PerfilJogo, Time, JogadorTime, Forum, Mentoria, Treino, Chat, Agenda
+from .models import Usuario, Jogo, PerfilJogo, Time, JogadorTime, Forum, Mentoria, Treino, Chat, Agenda,Amizade
 from django import forms
 
 class UsuarioForm(forms.ModelForm):
@@ -53,3 +53,9 @@ class AgendaForms(forms.ModelForm):
     class Meta:
         model = Agenda
         fields = ['data_atual', 'hora']
+
+
+class AmizadeForm(forms.ModelForm):
+    class Meta:
+        model = Amizade
+        fields = ['usuario', 'amigo', 'status']
