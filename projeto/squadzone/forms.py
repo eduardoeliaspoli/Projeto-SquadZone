@@ -58,4 +58,9 @@ class AgendaForms(forms.ModelForm):
 class AmizadeForm(forms.ModelForm):
     class Meta:
         model = Amizade
-        fields = ['usuario', 'amigo', 'status']
+        fields = ['status', 'amigo']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['status'].initial = 'Pendente' 
+        self.fields['status'].widget = forms.HiddenInput()

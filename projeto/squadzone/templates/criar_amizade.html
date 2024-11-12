@@ -11,6 +11,7 @@
     <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
+        <input type="hidden" name="amigo_id" value="{{ amigo_id }}">
         <button type="submit">Criar Amizade</button>
     </form>
 

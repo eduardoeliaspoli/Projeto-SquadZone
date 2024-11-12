@@ -124,12 +124,12 @@ class Amizade(models.Model):
     TAG_CHOICES = [
         ('Ativo', 'Ativo'),
         ('Pendente', 'Pendente'),
-        ('Bloqueio', 'Bloqueio')
+        ('Recusado', 'Recusado')
     ]
 
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='amizades_1')
     amigo = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='amizades_2')
-    status = models.CharField(max_length=50, choices=TAG_CHOICES)
+    status = models.CharField(max_length=50, choices=TAG_CHOICES, default='Pendente')
     data_criacao = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -142,4 +142,6 @@ class Amizade(models.Model):
     def save(self, *args, **kwargs):
         if self.usuario.id > self.amigo.id:
             self.usuario, self.amigo = self.amigo, self.usuario
+        if self.status == 'Ativo' and self.usuario == self.amigo:
+            raise ValueError("Não é possível ativar amizade com o mesmo usuário.")
         super().save(*args, **kwargs)
