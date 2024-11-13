@@ -1,29 +1,17 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Amigos</title>
+    <title>Amigos</title>
 </head>
 <body>
-    <h1>Lista de Amigos</h1>
-
-    <!-- Verificando se há amigos na lista -->
-    {% if amigos %}
-        <ul>
-            {% for amizade in amigos %}
-                <li>
-                    <a href="{% url 'perfil_usuario' usuario_id=amizade.amigo.id %}">
-                        {{ amizade.amigo.username }}
-                    </a> 
-                    - Status: {{ amizade.status }}
-                </li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>Você ainda não tem amigos.</p>
-    {% endif %}
-    
-    <p><a href="/">Voltar para a página inicial</a></p>
+    <h2>Seus Amigos</h2>
+    <ul>
+      {% for amigo in amigos %}
+        <li>{{ amigo.username }}</li>
+      {% empty %}
+        <li>Você não tem amigos ainda.</li>
+      {% endfor %}
+    </ul>
 </body>
 </html>

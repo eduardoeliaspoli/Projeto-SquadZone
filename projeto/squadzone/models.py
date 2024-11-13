@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.hashers import make_password, check_password
+from django.contrib.auth.models import User
 
 class Usuario(models.Model):
     nome = models.CharField(max_length=255)
@@ -121,27 +122,40 @@ class Agenda(models.Model):
 
 
 class Amizade(models.Model):
-    TAG_CHOICES = [
-        ('Ativo', 'Ativo'),
-        ('Pendente', 'Pendente'),
-        ('Recusado', 'Recusado')
+    PENDENTE = 'Pendente'
+    ACEITO = 'Aceito'
+    RECUSADO = 'Recusado'
+
+    STATUS_CHOICES = [
+        (PENDENTE, 'Pendente'),
+        (ACEITO, 'Aceito'),
+        (RECUSADO, 'Recusado'),
     ]
 
-    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='amizades_1')
-    amigo = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='amizades_2')
-    status = models.CharField(max_length=50, choices=TAG_CHOICES, default='Pendente')
+    # Relacionamento com os usuários
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE, related_name='solicitacoes_enviadas')
+    amigo = models.ForeignKey(User, on_delete=models.CASCADE, related_name='solicitacoes_recebidas')
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default=PENDENTE)
     data_criacao = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return f'{self.usuario.username} - {self.amigo.username} ({self.status})'
+
     class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['usuario', 'amigo'], name='amizade_unica')
-        ]
+        unique_together = ('usuario', 'amigo') 
 
+
+class Notificacao(models.Model):
+    TIPO_CHOICES = [
+        ('amizade', 'Pedido de amizade'),
+        ('mensagem', 'Mensagem'),
+    ]
     
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE, related_name='notificacoes')
+    tipo = models.CharField(max_length=50, choices=TIPO_CHOICES)
+    conteudo = models.TextField()
+    lida = models.BooleanField(default=False)
+    data_criacao = models.DateTimeField(auto_now_add=True)
 
-    def save(self, *args, **kwargs):
-        if self.usuario.id > self.amigo.id:
-            self.usuario, self.amigo = self.amigo, self.usuario
-        if self.status == 'Ativo' and self.usuario == self.amigo:
-            raise ValueError("Não é possível ativar amizade com o mesmo usuário.")
-        super().save(*args, **kwargs)
+    def __str__(self):
+        return f"Notificação para {self.usuario.username}: {self.conteudo[:30]}"
