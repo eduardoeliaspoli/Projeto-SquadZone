@@ -10,7 +10,10 @@ from django.contrib.auth.decorators import login_required
  
 def index(request):
     return render(request, 'index.html')
- 
+
+
+
+
 def criarTime(request):
     if request.method == 'POST':
         form = TimeForms(request.POST,request.FILES)
@@ -77,18 +80,17 @@ def enviar_solicitacao_amizade(request, amigo_id):
         messages.error(request, "Você não pode adicionar a si mesmo como amigo.")
         return redirect('lista_usuarios')
 
-    # Verifica se já existe um pedido pendente de amizade
     if Amizade.objects.filter(usuario=request.user, amigo=amigo, status=Amizade.PENDENTE).exists():
         messages.error(request, "Você já enviou um pedido de amizade para esse usuário.")
         return redirect('lista_usuarios')
     
-    # Verifica se já existe uma amizade ativa
+
     if Amizade.objects.filter(usuario=request.user, amigo=amigo, status=Amizade.ACEITO).exists() or \
        Amizade.objects.filter(usuario=amigo, amigo=request.user, status=Amizade.ACEITO).exists():
         messages.error(request, "Você já é amigo dessa pessoa.")
         return redirect('lista_usuarios')
     
-    # Cria um novo pedido de amizade
+
     Amizade.objects.create(usuario=request.user, amigo=amigo, status=Amizade.PENDENTE)
     messages.success(request, "Pedido de amizade enviado com sucesso!")
     return redirect('lista_usuarios')
@@ -106,6 +108,11 @@ def aceitar_solicitacao_amizade(request, amigo_id):
 
     messages.success(request, "Pedido de amizade aceito!")
     return redirect('lista_usuarios')
+
+
+def perfil_usuario(request, usuario_id):
+    usuario = get_object_or_404(Usuario, id=usuario_id)
+    return render(request, 'perfil_usuario.html', {'usuario': usuario})
 
 @login_required
 def recusar_solicitacao_amizade(request, amigo_id):

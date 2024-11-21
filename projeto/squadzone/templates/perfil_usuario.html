@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Perfil de {{ usuario.nome }}</title>
+</head>
+<body>
+    <h1>Perfil de {{ usuario.nome }}</h1>
+    <p><strong>Email:</strong> {{ usuario.email }}</p>
+    <p><strong>Localização:</strong> {{ usuario.localizacao }}</p>
+    <p><strong>Data de Nascimento:</strong> {{ usuario.data_nascimento }}</p>
+    <p><strong>Nível de Reputação:</strong> {{ usuario.nivel_reputacao }}</p>
+    <p><strong>Data de Criação:</strong> {{ usuario.data_criacao }}</p>
+
+<ul>
+  {% for amigo in amigos %}
+    <li>{{ amigo.username }}</li>
+  {% empty %}
+    <li>Este usuário ainda não tem amigos.</li>
+  {% endfor %}
+</ul>
+</body>
+</html>
