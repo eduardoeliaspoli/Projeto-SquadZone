@@ -1,7 +1,7 @@
 /* Estilo geral */
-body {
+#forum-page{
     font-family: Arial, sans-serif;
-    background-color: #555; /* Fundo escuro */
+    background-color: #212529; /* Fundo escuro */
     margin: 0;
     padding: 0;
     display: flex;
@@ -15,7 +15,7 @@ body {
 /* Área principal do fórum */
 .forum {
     width: 60%; /* Ajuste conforme necessário */
-    margin: 20px 0;
+    margin: 100px 0;
     background: #666; /* Fundo levemente mais claro que o body */
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Sombra mais escura */
@@ -40,14 +40,14 @@ body {
 }
 
 .postagem h2 a {
-    color: #ffcc00; /* Links amarelos */
+    color: white; /* Links amarelos */
     text-decoration: none;
     font-size: 1.5em;
 }
 
 .postagem h2 a:hover {
-    text-decoration: underline;
-    color: #ff9900; /* Destaque para hover */
+    text-decoration: none;
+
 }
 
 .postagem img {
@@ -75,11 +75,11 @@ body {
 
 #Relevante svg {
     cursor: pointer;
-    fill: #ffcc00; /* Ícones amarelos */
+    fill: white; /* Ícones amarelos */
 }
 
 .btn-comentario {
-    background-color: #007bff;
+    background-color: #555;
     color: white;
     padding: 5px 10px;
     text-decoration: none;

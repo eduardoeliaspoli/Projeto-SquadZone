@@ -27,7 +27,7 @@ urlpatterns = [
     path('agenda/', include('agenda.urls')),
     path('chat/', include('chat.urls')),
     path('forum/', include('forum.urls')),
-    path('friendship/', include('friendship.urls'))
+    path('accounts/', include('allauth.urls')),
     ]
 
 
