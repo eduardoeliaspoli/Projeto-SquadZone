@@ -1,0 +1,20 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{postagem.categoria}}</title>
+    <link rel="stylesheet" href="{% static 'css/forum.css' %}">
+</head>
+<body>
+    {% for postagem in postagens %}
+        <h1>{{postagem.titulo}}</h1>
+        <p>{{ postagem.descricao|truncatewords:10 }}</p>
+        <p>{{ postagem.autor }}</p>
+        <p>{{ postagem.criado_em }}</p>
+        <img src="{{ postagem.imagem_capa.url }}" width="400px" alt="">
+    {%endfor%}
+</body>
+</body>
+</html>

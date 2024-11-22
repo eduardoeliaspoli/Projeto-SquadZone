@@ -111,7 +111,7 @@ def aceitar_solicitacao_amizade(request, amigo_id):
 
 
 def perfil_usuario(request, usuario_id):
-    usuario = get_object_or_404(Usuario, id=usuario_id)
+    usuario = get_object_or_404(Usuario, user__id=usuario_id)
     return render(request, 'perfil_usuario.html', {'usuario': usuario})
 
 @login_required

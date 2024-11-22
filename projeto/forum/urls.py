@@ -10,7 +10,7 @@ urlpatterns = [
     path('cadastrar/categoria', views.cadastrar_categoria, name='cadastrar_categoria'),
     path('categoria/<slug:slug_categoria>/', views.filtrar_categoria, name='filtrar_categoria'),
     path('votar/<int:post_id>/<str:tipo_voto>/', views.votar_postagem, name='votar_postagem'),
-    
+    path('postagem/<slug:slug>/', views.ver_postagem, name='ver_postagem'), 
 ]
 
 if settings.DEBUG:  

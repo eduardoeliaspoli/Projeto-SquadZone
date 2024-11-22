@@ -114,3 +114,15 @@ def cadastrar_comentario(request, post_id):
 
 def cadastro_sucesso(request):
     return HttpResponse('Cadastrado com sucesso')
+
+
+def filtrar_categoria(request,slug_categoria):
+    categoria = get_object_or_404(Categoria, slug = slug_categoria)
+    postagens = Postagem.objects.filter(categoria=categoria)
+    return render(request,"jogos_categoria.html",{'postagens':postagens})
+
+
+def ver_postagem(request,slug):
+    postagem = get_object_or_404(Postagem,slug = slug)
+    comentarios = Comentario.objects.filter(postagem=postagem,ativo=True)
+    return render(request,'ver_postagem.html',{'postagem':postagem,'comentarios':comentarios})
