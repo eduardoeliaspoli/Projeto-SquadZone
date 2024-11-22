@@ -1,18 +1,30 @@
 from django.shortcuts import render, redirect, HttpResponse,get_object_or_404
-from .forms import UsuarioForm, TimeForms, TreinoForms,AmizadeForm
+from .forms import TimeForms, TreinoForms,AmizadeForm,PerfilJogoForm
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import logout
 from django.contrib import messages
-from .models import Amizade,Usuario
+from .models import Amizade,PerfilJogo
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
  
  
+
+
 def index(request):
     return render(request, 'index.html')
 
 
-
+def criar_perfil(request):
+    if request.method == 'POST':
+        form = PerfilJogoForm(request.POST, request.FILES)
+        if form.is_valid():
+            perfil = form.save(commit=False)
+            perfil.usuario = request.user
+            perfil.save()
+            return redirect('perfil_view')
+    else:
+        form = PerfilJogoForm()
+    return render(request, 'criar_perfil.html', {'form': form})
 
 def criarTime(request):
     if request.method == 'POST':
@@ -38,7 +50,7 @@ def criarUsuario(request):
             usuario.save()
             return redirect('sucesso')
     else:
-        form = UsuarioForm()  # Inicializa o formulário para requisições GET
+        form = UsuarioForm()  
        
     return render(request, 'CriarUsuario.html', {'form': form})
  
@@ -110,9 +122,13 @@ def aceitar_solicitacao_amizade(request, amigo_id):
     return redirect('lista_usuarios')
 
 
-def perfil_usuario(request, usuario_id):
-    usuario = get_object_or_404(Usuario, user__id=usuario_id)
-    return render(request, 'perfil_usuario.html', {'usuario': usuario})
+def perfil_usuario(request, username):
+    perfil = get_object_or_404(PerfilJogo, usuario__username=username)
+    
+    context = {
+        'perfil': perfil
+    }
+    return render(request, 'perfil_usuario.html', context)
 
 @login_required
 def recusar_solicitacao_amizade(request, amigo_id):

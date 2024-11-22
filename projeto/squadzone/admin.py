@@ -1,25 +1,14 @@
 from django.contrib import admin
-from .models import Usuario, Jogo, PerfilJogo, Time, JogadorTime, Forum, Mentoria, Treino, Chat, Agenda,Amizade
-
-@admin.register(Usuario)
-class UsuarioAdmin(admin.ModelAdmin):
-    list_display = ('nome', 'email', 'data_criacao')  # Remova 'nivel_reputacao'
-    search_fields = ('nome', 'email')
-
-    def save_model(self, request, obj, form, change):
-        if not change:  
-            obj.nivel_reputacao = 3  
-        super().save_model(request, obj, form, change)
-
+from .models import PerfilJogo, Jogo, PerfilJogo, Time, JogadorTime, Forum, Mentoria, Treino, Chat, Agenda,Amizade
+@admin.register(PerfilJogo)
+class PerfilJogoAdmin(admin.ModelAdmin):
+    list_display = ['usuario', 'tipo_jogador', 'data_nascimento', 'localizacao']
+    search_fields = ['usuario__username', 'tipo_jogador', 'localizacao']
 
 @admin.register(Jogo)
 class JogoAdmin(admin.ModelAdmin):
     list_display = ('nome', 'tipo')
     search_fields = ('nome',)
-
-@admin.register(PerfilJogo)
-class PerfilJogoAdmin(admin.ModelAdmin):
-    list_display = ('usuario', 'jogo', 'tag')
 
 @admin.register(Time)
 class TimeAdmin(admin.ModelAdmin):
