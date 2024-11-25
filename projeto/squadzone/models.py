@@ -1,34 +1,6 @@
 from django.db import models
-from django import forms 
-from django.contrib.auth.hashers import make_password, check_password
-
-class Usuario(models.Model):
-    nome = models.CharField(max_length=255)
-    localizacao = models.CharField(max_length=255)
-    data_nascimento = models.DateField()
-    email = models.EmailField(unique=True)
-    senha = models.CharField(max_length=255)  # Considere usar `make_password` para senhas
-    nivel_reputacao = models.IntegerField(default=3)  # Padrão para 3
-    data_criacao = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.nome
-    
-    def save(self, *args, **kwargs):
-        if self.senha:
-            self.senha = make_password(self.senha)  # Criptografa a senha
-        super().save(*args, **kwargs)
-
-    def verificar_senha(self, senha):
-        return check_password(senha, self.senha) 
-
-class Jogo(models.Model):
-    nome = models.CharField(max_length=255)
-    tipo = models.CharField(max_length=255)
-
-    def __str__(self):
-        return self.nome
-
+from django import forms
+from django.contrib.auth.models import User
 
 class PerfilJogo(models.Model):
     MODALIDADE_CHOICES = [
@@ -36,12 +8,26 @@ class PerfilJogo(models.Model):
         ('competitivo', 'Competitivo'),
     ]
 
-    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='perfis')
-    jogo = models.ForeignKey(Jogo, on_delete=models.CASCADE, related_name='perfis')
-    tag = models.CharField(max_length=50, choices=MODALIDADE_CHOICES)
+    usuario = models.OneToOneField(User, on_delete=models.CASCADE, related_name='perfil')
+    jogos = models.ManyToManyField('Jogo', related_name='jogadores')
+    tipo_jogador = models.CharField(max_length=50, choices=MODALIDADE_CHOICES)
+    data_nascimento = models.DateField()
+    localizacao = models.CharField(max_length=255)
+    foto_perfil = models.ImageField(upload_to='imagens_perfil/', blank=True)
 
     def __str__(self):
-        return f'{self.usuario} - {self.jogo}'
+        return f'Perfil de {self.usuario.username}'
+
+    class Meta:
+        verbose_name = "Perfil de Jogo"
+        verbose_name_plural = "Perfis de Jogo"
+class Jogo(models.Model):
+    nome = models.CharField(max_length=255)
+    tipo = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.nome
+
 
 
 class Time(models.Model):
@@ -53,7 +39,7 @@ class Time(models.Model):
     nome = models.CharField(max_length=255)
     tag = models.CharField(max_length=50, choices=TAG_CHOICES)
     escudo = models.ImageField(upload_to='escudos/')
-    criador = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='times_criados')
+    criador = models.ForeignKey(User, on_delete=models.CASCADE, related_name='times_criados')
 
     def __str__(self):
         return self.nome
@@ -61,7 +47,7 @@ class Time(models.Model):
 
 class JogadorTime(models.Model):
     time = models.ForeignKey(Time, on_delete=models.CASCADE, related_name='jogadores')
-    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='jogadores_times')
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE, related_name='jogadores_times')
     funcao = models.CharField(max_length=255)
     data_entrada = models.DateField()
     data_saida = models.DateField(null=True, blank=True)
@@ -71,7 +57,7 @@ class JogadorTime(models.Model):
 
 
 class Forum(models.Model):
-    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='posts')
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE, related_name='posts')
     titulo = models.CharField(max_length=255)
     conteudo = models.TextField()
     data_postagem = models.DateTimeField(auto_now_add=True)
@@ -81,8 +67,8 @@ class Forum(models.Model):
 
 
 class Mentoria(models.Model):
-    usuario_experiente = models.ForeignKey(Usuario, related_name='mentorias_experientes', on_delete=models.CASCADE)
-    usuario_novato = models.ForeignKey(Usuario, related_name='mentorias_novatos', on_delete=models.CASCADE)
+    usuario_experiente = models.ForeignKey(User, related_name='mentorias_experientes', on_delete=models.CASCADE)
+    usuario_novato = models.ForeignKey(User, related_name='mentorias_novatos', on_delete=models.CASCADE)
     tema = models.CharField(max_length=255)
     data_mentoria = models.DateField()
 
@@ -102,8 +88,8 @@ class Treino(models.Model):
 
 
 class Chat(models.Model):
-    usuario_enviou = models.ForeignKey(Usuario, related_name='chats_enviados', on_delete=models.CASCADE)
-    usuario_recebeu = models.ForeignKey(Usuario, related_name='chats_recebidos', on_delete=models.CASCADE)
+    usuario_enviou = models.ForeignKey(User, related_name='chats_enviados', on_delete=models.CASCADE)
+    usuario_recebeu = models.ForeignKey(User, related_name='chats_recebidos', on_delete=models.CASCADE)
     data_envio = models.DateTimeField(auto_now_add=True)
     data_recebido = models.DateTimeField(null=True, blank=True)
 

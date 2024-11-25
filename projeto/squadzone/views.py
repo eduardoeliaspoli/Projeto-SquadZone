@@ -1,12 +1,28 @@
 from django.shortcuts import render, redirect, HttpResponse
-from .forms import UsuarioForm, TimeForms, TreinoForms
+from .forms import PerfilJogoForm, TimeForms, TreinoForms
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import logout
  
  
 def index(request):
     return render(request, 'index.html')
- 
+
+def buscar(request):
+    return render(request, 'buscar')
+
+
+def criar_perfil(request):
+    if request.method == 'POST':
+        form = PerfilJogoForm(request.POST, request.FILES)
+        if form.is_valid():
+            perfil = form.save(commit=False)
+            perfil.usuario = request.user
+            perfil.save()
+            return redirect('perfil_view')
+    else:
+        form = PerfilJogoForm()
+    return render(request, 'criar_perfil.html', {'form': form})
+
 def criarTime(request):
     if request.method == 'POST':
         form = TimeForms(request.POST,request.FILES)
