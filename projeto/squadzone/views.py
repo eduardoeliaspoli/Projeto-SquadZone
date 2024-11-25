@@ -139,14 +139,13 @@ def recusar_solicitacao_amizade(request, amigo_id):
     return redirect('lista_usuarios')
 
 def lista_amigos(request):
-    # Obtém as amizades ativas onde o usuário é o remetente ou o destinatário
+    
     amigos_ativos = Amizade.objects.filter(usuario=request.user, status=Amizade.ACEITO) | \
                     Amizade.objects.filter(amigo=request.user, status=Amizade.ACEITO)
                     
-    # Cria uma lista dos usuários amigos, considerando o remetente e o destinatário
+
     amigos = [amizade.amigo for amizade in amigos_ativos] + [amizade.usuario for amizade in amigos_ativos]
     
-    # Remove duplicados
     amigos = list(set(amigos) - {request.user})
     
     return render(request, 'lista_amigos.html', {'amigos': amigos})

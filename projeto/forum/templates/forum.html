@@ -19,7 +19,7 @@
             <li class="postagem">
                 <h2><a href="postagem/{{ postagem.slug }}">{{ postagem.titulo }}</a></h2>
                 <p>{{ postagem.descricao|truncatewords:500 }}</p>
-                <p><strong> Autor:</strong> <a href="{% url 'perfil_usuario' postagem.autor.id %}">{{ postagem.autor }}</a></p>
+                <p><strong> Autor:</strong> <a href="{% url 'perfil_usuario' postagem.autor.username %}">{{ postagem.autor }}</a></p>
                 <p ><strong>Criado em:</strong> {{ postagem.criado_em }}</p>
                 <p><strong>Categoria:</strong> <a href="categoria/{{ postagem.categoria.slug }}">{{ postagem.categoria }}</a></p>
                 {% if postagem.imagem_capa %}
