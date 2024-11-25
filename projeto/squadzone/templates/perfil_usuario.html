@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil de {{ perfil.usuario.username }}</title>
+</head>
+<body>
+    <h1>Perfil de {{ perfil.usuario.username }}</h1>
+    <img src="{{ perfil.foto_perfil.url }}" alt="Foto de perfil" width="150">
+    <p><strong>Nome de Usuário:</strong> {{ perfil.usuario.username }}</p>
+    <p><strong>Email:</strong> {{ perfil.usuario.email }}</p>
+    <p><strong>Localização:</strong> {{ perfil.localizacao }}</p>
+    <p><strong>Data de Nascimento:</strong> {{ perfil.data_nascimento }}</p>
+    <p><strong>Modalidade:</strong> {{ perfil.get_tipo_jogador_display }}</p>
+    <h3>Jogos:</h3>
+    <ul>
+        {% for jogo in perfil.jogos.all %}
+            <li>{{ jogo.nome }} - {{ jogo.tipo }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

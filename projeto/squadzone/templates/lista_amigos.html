@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Amigos</title>
+</head>
+<body>
+    <h2>Seus Amigos</h2>
+    <ul>
+      {% for amigo in amigos %}
+        <li>{{ amigo.username }}</li>
+      {% empty %}
+        <li>Você não tem amigos ainda.</li>
+      {% endfor %}
+    </ul>
+</body>
+</html>

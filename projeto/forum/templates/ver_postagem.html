@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ postagem.titulo }}</title>
+</head>
+{% include 'navbar.html' %}
+<body>
+    <h2>{{ postagem.titulo }}</h2>
+    <p>{{ postagem.descricao}}</p>
+    <p>{{ postagem.autor }}</p>
+    <p>{{ postagem.criado_em }}</p>
+    <img src="{{ postagem.imagem_capa.url }}" width="400px" alt="">
+
+    <h1>Comentários</h1>
+    {% for comentario in comentarios %}
+    <p><strong>Autor:</strong> {{ comentario.usuario.username }}</p>
+    <p><strong>Comentário:</strong> {{ comentario.texto }}</p>
+    <p><em>Comentado em: {{ comentario.criado_em|date:"d/m/Y H:i" }}</em></p>
+    {% endfor %}
+</body>
+</body>
+</html>

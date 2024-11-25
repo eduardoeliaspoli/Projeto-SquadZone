@@ -1,25 +1,14 @@
 from django.contrib import admin
-from .models import Usuario, Jogo, PerfilJogo, Time, JogadorTime, Forum, Mentoria, Treino, Chat, Agenda
-
-@admin.register(Usuario)
-class UsuarioAdmin(admin.ModelAdmin):
-    list_display = ('nome', 'email', 'data_criacao')  # Remova 'nivel_reputacao'
-    search_fields = ('nome', 'email')
-
-    def save_model(self, request, obj, form, change):
-        if not change:  
-            obj.nivel_reputacao = 3  
-        super().save_model(request, obj, form, change)
-
+from .models import PerfilJogo, Jogo, PerfilJogo, Time, JogadorTime, Forum, Mentoria, Treino, Chat, Agenda,Amizade
+@admin.register(PerfilJogo)
+class PerfilJogoAdmin(admin.ModelAdmin):
+    list_display = ['usuario', 'tipo_jogador', 'data_nascimento', 'localizacao']
+    search_fields = ['usuario__username', 'tipo_jogador', 'localizacao']
 
 @admin.register(Jogo)
 class JogoAdmin(admin.ModelAdmin):
     list_display = ('nome', 'tipo')
     search_fields = ('nome',)
-
-@admin.register(PerfilJogo)
-class PerfilJogoAdmin(admin.ModelAdmin):
-    list_display = ('usuario', 'jogo', 'tag')
 
 @admin.register(Time)
 class TimeAdmin(admin.ModelAdmin):
@@ -55,3 +44,10 @@ class ChatAdmin(admin.ModelAdmin):
 class AgendaAdmin(admin.ModelAdmin):
     list_display = ('data_atual', 'hora')
     search_fields = ('data_atual',)
+
+@admin.register(Amizade)
+class AmizadeAdmin(admin.ModelAdmin):
+    list_display = ('usuario', 'amigo', 'status', 'data_criacao')  # Exibir os campos relevantes
+    search_fields = ('usuario__nome', 'amigo__nome', 'status')  # Permite pesquisa por nome dos usuários e status
+    list_filter = ('status',)  # Filtro por status de amizade
+    ordering = ('data_criacao',)  # Ordenar as amizades pela data de criação
