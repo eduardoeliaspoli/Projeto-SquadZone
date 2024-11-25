@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'agenda',
     'chat',
     'forum',
-    'friendship',
     'channels',
     'django.contrib.sites',
     'allauth',
