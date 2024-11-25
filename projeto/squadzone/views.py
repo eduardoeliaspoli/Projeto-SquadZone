@@ -13,6 +13,9 @@ from django.contrib.auth.decorators import login_required
 def index(request):
     return render(request, 'index.html')
 
+def buscar(request):
+    return render(request, 'buscar')
+
 
 def criar_perfil(request):
     if request.method == 'POST':

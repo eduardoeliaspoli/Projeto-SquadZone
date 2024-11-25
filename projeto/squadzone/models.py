@@ -8,7 +8,7 @@ class PerfilJogo(models.Model):
     ]
 
     usuario = models.OneToOneField(User, on_delete=models.CASCADE, related_name='perfil')
-    jogos = models.ManyToManyField('Jogo', related_name='jogadores')  # Relacionamento com jogos
+    jogos = models.ManyToManyField('Jogo', related_name='jogadores')
     tipo_jogador = models.CharField(max_length=50, choices=MODALIDADE_CHOICES)
     data_nascimento = models.DateField()
     localizacao = models.CharField(max_length=255)

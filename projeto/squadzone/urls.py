@@ -18,5 +18,6 @@ urlpatterns = [
     path('usuarios/',views.lista_usuarios, name= 'lista_usuarios' ),
     path('solicitacoes-pendentes/', views.solicitacoes_pendentes, name='solicitacoes_pendentes'),
     path('perfil/<str:username>/', views.perfil_usuario, name='perfil_usuario'),
-    path('criar-perfil/', views.criar_perfil, name='criar_perfil')
+    path('criar-perfil/', views.criar_perfil, name='criar_perfil'),
+    path('buscar/', views.buscar, name= 'buscar')
 ]
