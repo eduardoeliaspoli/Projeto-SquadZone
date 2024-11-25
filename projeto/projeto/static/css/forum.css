@@ -1,118 +1,40 @@
-/* Estilo geral */
-#forum-page{
-    font-family: Arial, sans-serif;
-    background-color: #212529; /* Fundo escuro */
-    margin: 0;
-    padding: 0;
-    display: flex;
+.forum{
+    margin-top: 10px;
+    height: 100%;
+    background-color: #525252;
+    color: #313131;
     justify-content: center;
-    align-items: flex-start;
-    min-height: 100vh;
-    color: #fff;
-     /* Texto claro para contraste */
+    align-items: center;
+    display: flex; flex-direction: column; min-height: 100vh;
+    
 }
 
-/* Área principal do fórum */
-.forum {
-    width: 60%; /* Ajuste conforme necessário */
-    margin: 100px 0;
-    background: #666; /* Fundo levemente mais claro que o body */
+.postagem{
+    margin-top: 10px;
+    border: 4px solid #313131;
     border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Sombra mais escura */
-    padding: 20px;
-    color: #fff; /* Texto branco */
 }
 
-/* Lista de postagens */
-.postagens {
-    list-style: none;
-    padding: 0;
+.postagem img{
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto;
 }
 
-/* Postagem individual */
-.postagem {
-    border-bottom: 1px solid #777; /* Linha com contraste */
-    padding: 20px 0;
+.postagem a {
+    color: inherit;          /* Mantém a cor do texto pai */
+    text-decoration: none;   /* Remove o sublinhado */
 }
 
-.postagem:last-child {
-    border-bottom: none;
-}
 
-.postagem h2 a {
-    color: white; /* Links amarelos */
-    text-decoration: none;
-    font-size: 1.5em;
-}
-
-.postagem h2 a:hover {
-    text-decoration: none;
-
-}
-
-.postagem img {
-    margin-top: 15px;
-    border-radius: 8px;
-    width: 100%; /* Imagem ocupa a largura do post */
-    max-width: 400px; /* Limite de largura */
-    border: 1px solid #777; /* Borda fina para imagens */
-}
-
-/* Informações do autor e data */
-.postagem p {
-    color: #ddd; /* Texto cinza claro */
-    line-height: 1.6;
-    margin: 5px 0;
-}
-
-/* Botões de votação e comentários */
 #Relevante {
     display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 15px;
+    align-items: left; /* Alinha os itens verticalmente no centro */
+    justify-content: left; /* Centraliza os itens horizontalmente */
+    margin-top: 10px; /* Espaçamento acima da div */
+    color: white; /* Cor do texto */
 }
-
 #Relevante svg {
-    cursor: pointer;
-    fill: white; /* Ícones amarelos */
-}
-
-.btn-comentario {
-    background-color: #555;
-    color: white;
-    padding: 5px 10px;
-    text-decoration: none;
-    border-radius: 5px;
-    font-size: 14px;
-}
-
-.btn-comentario:hover {
-    background-color: #0056b3;
-}
-
-/* Seção de comentários */
-.comentarios {
-    margin-top: 20px;
-    padding: 10px;
-    background: #444; /* Fundo mais escuro */
-    border-radius: 8px;
-    color: #fff; /* Texto branco */
-}
-
-.comentarios h3 {
-    margin: 0 0 10px 0;
-}
-
-.comentarios .comentario {
-    margin-bottom: 10px;
-    padding: 10px;
-    background: #666; /* Fundo igual ao da área principal */
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Sombra leve */
-}
-
-.comentarios .comentario hr {
-    border: none;
-    border-top: 1px solid #777; /* Linha de separação */
+    margin: 0 5px; /* Espaçamento entre os ícones e o texto */
 }
