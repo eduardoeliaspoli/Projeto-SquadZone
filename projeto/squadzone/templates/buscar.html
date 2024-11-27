@@ -1,0 +1,33 @@
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/buscar.css' %}">
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuários</title>
+    <link rel="stylesheet" href="{% static 'css/usuarios.css' %}">
+</head>
+<body>
+    <div class="cards-container">
+        {% for usuario in usuarios %}
+        <div class="card">
+            <div class="card-header"></div>
+            <div class="card-avatar">
+                <!-- Avatar genérico ou específico do usuário -->
+                <img src="{% static 'images/avatar.png' %}" alt="Avatar">
+            </div>
+            <div class="card-info">
+                <h3>{{ usuario.username }}</h3>
+                <p>{{ usuario.email }}</p>
+                <p>Data de cadastro: {{ usuario.date_joined|date:"d/m/Y" }}</p>
+            </div>
+            <a class="button" href="{% url 'perfil_usuario' usuario.username %}">Ver perfil</a>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
+  

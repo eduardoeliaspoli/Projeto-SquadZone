@@ -19,4 +19,5 @@ urlpatterns = [
     path('perfil/<str:username>/', views.perfil_usuario, name='perfil_usuario'),
     path('criar-perfil/', views.criar_perfil, name='criar_perfil'),
     path('chat/<int:user_id>/', views.private_chat, name='private_chat'),
+    path('buscar/', views.buscar, name='buscar' ),
 ]

@@ -17,6 +17,10 @@ from django.db.models import Q
 def index(request):
     return render(request, 'index.html')
 
+def buscar(request):
+    usuarios = User.objects.all()  # Busca todos os usuários cadastrados
+    return render(request, 'buscar.html', {'usuarios': usuarios})
+
 
 def criar_perfil(request):
     if request.method == 'POST':
