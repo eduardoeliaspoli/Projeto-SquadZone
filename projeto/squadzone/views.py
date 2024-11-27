@@ -39,21 +39,7 @@ def criarTime(request):
        
     return render(request, 'criarTime.html', {'form': form})
  
- 
- 
-def criarUsuario(request):
-    if request.method == 'POST':
-        form = UsuarioForm(request.POST)
-        if form.is_valid():
-            usuario = form.save(commit=False)
-            usuario.nivel_reputacao = 3
-            usuario.save()
-            return redirect('sucesso')
-    else:
-        form = UsuarioForm()  
-       
-    return render(request, 'CriarUsuario.html', {'form': form})
- 
+
  
 def agenda(request):
     return render(request, 'agenda.html')

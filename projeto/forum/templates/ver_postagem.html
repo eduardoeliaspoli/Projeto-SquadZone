@@ -1,24 +1,35 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ postagem.titulo }}</title>
+    <link rel="stylesheet" href="{% static 'css/postagem.css' %}">
 </head>
-{% include 'navbar.html' %}
-<body>
-    <h2>{{ postagem.titulo }}</h2>
-    <p>{{ postagem.descricao}}</p>
-    <p>{{ postagem.autor }}</p>
-    <p>{{ postagem.criado_em }}</p>
-    <img src="{{ postagem.imagem_capa.url }}" width="400px" alt="">
-
-    <h1>Comentários</h1>
-    {% for comentario in comentarios %}
-    <p><strong>Autor:</strong> {{ comentario.usuario.username }}</p>
-    <p><strong>Comentário:</strong> {{ comentario.texto }}</p>
-    <p><em>Comentado em: {{ comentario.criado_em|date:"d/m/Y H:i" }}</em></p>
-    {% endfor %}
-</body>
+<body id="postagem-page">
+    {% include 'navbar.html' %}
+    <div id="postagem-body">
+        <h2>{{ postagem.titulo }}</h2>
+        <p>{{ postagem.descricao }}</p>
+        <p><strong>Autor:</strong> {{ postagem.autor }}</p>
+        <p><em>Criado em: {{ postagem.criado_em }}</em></p>
+        {% if postagem.imagem_capa %}
+            <img src="{{ postagem.imagem_capa.url }}" id = 'imagem-postagem'>
+        {% endif %}
+        <div class="comentarios">
+            <h3>Comentários</h3>
+            {% for comentario in postagem.comentarios.all %}
+                <div class="comentario">
+                    <p><strong>Autor:</strong> {{ comentario.usuario.username }}</p>
+                    <p>{{ comentario.texto }}</p>
+                    <p><em>Comentado em: {{ comentario.criado_em|date:"d/m/Y H:i" }}</em></p>
+                    <hr>
+                </div>
+            {% empty %}
+                <p>Não há comentários para esta postagem.</p>
+            {% endfor %}
+        </div>
+    </div>
 </body>
 </html>

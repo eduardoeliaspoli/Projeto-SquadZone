@@ -1,19 +1,16 @@
-/* Estilo geral */
-#forum-page{
-    font-family: Arial, sans-serif;
-    background-color: #212529; /* Fundo escuro */
+#postagem-page{
     margin: 0;
     padding: 0;
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    min-height: 100vh;
-    color: #fff;
-     /* Texto claro para contraste */
+    background-color: #212529;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-/* Área principal do fórum */
-.forum {
+#postagem-body{
+    
     width: 60%; /* Ajuste conforme necessário */
     margin: 100px 0;
     background: #666; /* Fundo levemente mais claro que o body */
@@ -39,68 +36,40 @@
     border-bottom: none;
 }
 
+
+
 .postagem h2 a {
     color: white; /* Links amarelos */
     text-decoration: none;
     font-size: 1.5em;
 }
 
-
-
 .postagem h2 a:hover {
     text-decoration: none;
 
 }
 
-.postagem img {
+#imagem-postagem {
     margin-top: 15px;
     border-radius: 8px;
     width: 100%; /* Imagem ocupa a largura do post */
     max-width: 400px; /* Limite de largura */
     border: 1px solid #777; /* Borda fina para imagens */
 }
-
 /* Informações do autor e data */
 .postagem p {
     color: #ddd; /* Texto cinza claro */
     line-height: 1.6;
     margin: 5px 0;
-    text-decoration: none;
 }
 
-/* Botões de votação e comentários */
-#Relevante {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 15px;
-}
-
-#Relevante svg {
-    cursor: pointer;
-    fill: white; /* Ícones amarelos */
-}
-
-.btn-comentario {
-    background-color: #555;
-    color: white;
-    padding: 5px 10px;
-    text-decoration: none;
-    border-radius: 5px;
-    font-size: 14px;
-}
-
-.btn-comentario:hover {
-    background-color: #0056b3;
-}
-
-/* Seção de comentários */
 .comentarios {
     margin-top: 20px;
     padding: 10px;
     background: #444; /* Fundo mais escuro */
     border-radius: 8px;
     color: #fff; /* Texto branco */
+    margin-bottom: 20px;
 }
 
 .comentarios h3 {
@@ -119,3 +88,5 @@
     border: none;
     border-top: 1px solid #777; /* Linha de separação */
 }
+
+

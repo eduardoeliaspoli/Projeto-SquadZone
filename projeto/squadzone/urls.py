@@ -5,7 +5,6 @@ from .views import logout_view
 
 urlpatterns = [
     path('', views.index, name='index'),   # PRECISA DO DEF INDEX NAS VIEWS.PY DO SQUADZONE
-    path('cadastrar/usuario', views.criarUsuario, name='CriarUsuario'),
     path('cadastrar/time', views.criarTime, name='criarTime'),
     path('sucesso/', views.sucesso, name='sucesso'),
     path('agenda/', include('agenda.urls')),
