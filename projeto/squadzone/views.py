@@ -3,9 +3,13 @@ from .forms import TimeForms, TreinoForms,AmizadeForm,PerfilJogoForm
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import logout
 from django.contrib import messages
+from .models import Message
 from .models import Amizade,PerfilJogo
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
+from . import models
+from django.db.models import Q
  
  
 
@@ -145,3 +149,23 @@ def lista_usuarios(request):
 def solicitacoes_pendentes(request):
     solicitacoes = Amizade.objects.filter(amigo=request.user, status=Amizade.PENDENTE)
     return render(request, 'solicitacoes_pendentes.html', {'solicitacoes': solicitacoes})
+
+
+@login_required
+def private_chat(request, user_id):
+    other_user = get_object_or_404(User, id=user_id)
+
+    # Histórico de mensagens entre os dois usuários
+    messages = Message.objects.filter(
+        (Q(sender=request.user) & Q(receiver=other_user)) |
+        (Q(sender=other_user) & Q(receiver=request.user))
+    )
+
+    if request.method == "POST":
+        content = request.POST.get('content')
+        if content:
+            Message.objects.create(sender=request.user, receiver=other_user, content=content)
+
+            return JsonResponse({'status': 'Mensagem enviada com sucesso!'})
+
+    return render(request, 'chat/private_chat.html', {'messages': messages, 'other_user': other_user})
