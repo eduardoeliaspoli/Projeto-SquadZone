@@ -4,7 +4,7 @@ from django.contrib.auth.views import LoginView
 from django.contrib.auth import logout
 from django.contrib import messages
 from .models import Message
-from .models import Amizade,PerfilJogo
+from .models import Amizade,PerfilJogo,Time
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
@@ -17,9 +17,24 @@ from django.db.models import Q
 def index(request):
     return render(request, 'index.html')
 
+def perfil_time(request, id):
+    # Recupera o time com o id especificado ou retorna 404 caso não exista
+    time = get_object_or_404(Time, id=id)
+    
+    # Passa o time para o template
+    context = {
+        'time': time
+    }
+    return render(request, 'perfil_time.html', context)
+
 def buscar(request):
-    usuarios = User.objects.all()  # Busca todos os usuários cadastrados
-    return render(request, 'buscar.html', {'usuarios': usuarios})
+    perfis = PerfilJogo.objects.all()  # Busca todos os perfis de usuários
+    times = Time.objects.all()  # Busca todos os times cadastrados
+    context = {
+        'perfis': perfis,
+        'times': times
+    }
+    return render(request, 'buscar.html', context)
 
 
 def criar_perfil(request):
@@ -29,7 +44,7 @@ def criar_perfil(request):
             perfil = form.save(commit=False)
             perfil.usuario = request.user
             perfil.save()
-            return redirect('perfil_view')
+            return redirect('perfil_usuario/perfil.usuario')
     else:
         form = PerfilJogoForm()
     return render(request, 'criar_perfil.html', {'form': form})

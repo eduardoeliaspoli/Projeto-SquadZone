@@ -7,27 +7,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Usuários</title>
-    <link rel="stylesheet" href="{% static 'css/usuarios.css' %}">
+    <title>Buscar</title>
+    <link rel="stylesheet" href="{% static 'css/buscar.css' %}">
 </head>
-<body>
-    <div class="cards-container">
-        {% for usuario in usuarios %}
+<body id='cards-usuarios-times'>
+    <!-- Botões para alternar entre Usuários e Times -->
+    <div class="button-group">
+        <button id="btn-usuarios" class="btn" onclick="mostrarUsuarios()">Usuários</button>
+        <button id="btn-times" class="btn" onclick="mostrarTimes()">Times</button>
+    </div>
+
+    <!-- Divs para exibir perfis de usuário e times -->
+    <div id="usuarios-container" class="cards-container">
+        {% for perfil in perfis %}
         <div class="card">
-            <div class="card-header"></div>
             <div class="card-avatar">
-                <!-- Avatar genérico ou específico do usuário -->
-                <img src="{% static 'images/avatar.png' %}" alt="Avatar">
+                {% if perfil.foto_perfil %}
+                    <img src="{{ perfil.foto_perfil.url }}" alt="Avatar" class="avatar-imagem">
+                {% else %}
+                    <img src="{% static 'img/avatar.png' %}" alt="Avatar" class="avatar-imagem">
+                {% endif %}
             </div>
             <div class="card-info">
-                <h3>{{ usuario.username }}</h3>
-                <p>{{ usuario.email }}</p>
-                <p>Data de cadastro: {{ usuario.date_joined|date:"d/m/Y" }}</p>
+                <h3>{{ perfil.usuario.username }}</h3>
+                <p>{{ perfil.usuario.email }}</p>
+                <p>Data de cadastro: {{ perfil.usuario.date_joined|date:"d/m/Y" }}</p>
             </div>
-            <a class="button" href="{% url 'perfil_usuario' usuario.username %}">Ver perfil</a>
+            <a class="button" href="{% url 'perfil_usuario' perfil.usuario.username %}">Ver perfil</a>
         </div>
         {% endfor %}
     </div>
+
+    <div id="times-container" class="cards-container hidden">
+        {% for time in times %}
+        <div class="card">
+            <div class="card-avatar">
+                <img src="{{ time.escudo.url }}" alt="Escudo do Time" class="avatar-imagem">
+            </div>
+            <div class="card-info">
+                <h3>{{ time.nome }}</h3>
+                <p>Tag: {{ time.get_tag_display }}</p>
+                <p>Criador: {{ time.criador.username }}</p>
+            </div>
+            <a class="button" href="{% url 'perfil_time' time.id %}">Ver Time</a>
+        </div>
+        {% endfor %}
+    </div>
+
+    <script>
+        // Função para exibir a lista de usuários
+// Função para exibir a lista de usuários
+function mostrarUsuarios() {
+    document.getElementById("usuarios-container").classList.remove('hidden');
+    document.getElementById("times-container").classList.add('hidden');
+    document.getElementById("btn-usuarios").classList.add("active");
+    document.getElementById("btn-times").classList.remove("active");
+}
+
+// Função para exibir a lista de times
+function mostrarTimes() {
+    document.getElementById("usuarios-container").classList.add('hidden');
+    document.getElementById("times-container").classList.remove('hidden');
+    document.getElementById("btn-times").classList.add("active");
+    document.getElementById("btn-usuarios").classList.remove("active");
+}
+
+// Exibe usuários por padrão quando a página carregar
+window.onload = function() {
+    mostrarUsuarios();
+}
+
+
+        // Exibe usuários por padrão quando a página carregar
+        window.onload = function() {
+            mostrarUsuarios();
+        }
+    </script>
+
 </body>
 </html>
-  

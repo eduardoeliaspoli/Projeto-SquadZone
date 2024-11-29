@@ -2,6 +2,8 @@ from django.urls import path, include
 from . import views
 from django.contrib.auth import views as auth_views
 from .views import logout_view
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.index, name='index'),   # PRECISA DO DEF INDEX NAS VIEWS.PY DO SQUADZONE
@@ -20,4 +22,8 @@ urlpatterns = [
     path('criar-perfil/', views.criar_perfil, name='criar_perfil'),
     path('chat/<int:user_id>/', views.private_chat, name='private_chat'),
     path('buscar/', views.buscar, name='buscar' ),
+    path('time/<int:id>/', views.perfil_time, name='perfil_time'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

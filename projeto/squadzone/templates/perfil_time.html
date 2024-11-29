@@ -1,0 +1,43 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil do Time</title>
+    <link rel="stylesheet" href="{% static 'css/usuarios.css' %}">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Perfil do Time: {{ time.nome }}</h1>
+
+        <div class="card">
+            <div class="card-header">
+                <h3>{{ time.nome }}</h3>
+                <p><strong>Tag:</strong> {{ time.get_tag_display }}</p>
+            </div>
+            <div class="card-body">
+                <p><strong>Criador:</strong> {{ time.criador.username }}</p>
+                <p><strong>Data de Criação:</strong> {{ time.criado|date:"d/m/Y" }}</p>
+
+                <!-- Exibindo o escudo do time -->
+                <div class="card-avatar">
+                    <img src="{{ time.escudo.url }}" alt="Escudo do Time" class="avatar-imagem">
+                </div>
+
+                <h4>Membros:</h4>
+                <ul>
+                    {% for membro in time.membros.all %}
+                        <li>{{ membro.username }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <div class="mt-3 text-center">
+            <a href="{% url 'buscar' %}" class="btn btn-link">Voltar à Busca</a>
+        </div>
+    </div>
+</body>
+</html>
